@@ -80,21 +80,21 @@ THEMES = {
     },
     "glassmorphism": {
         "name": "Glassmorphism",
-        "bg": "rgba(255, 255, 255, 0.1)",
+        "bg": "#1e1e2e",  # Dark base color for glass effect
         "fg": "#ffffff",
         "accent": "#6366f1",
         "secondary": "#8b5cf6",
-        "surface": "rgba(255, 255, 255, 0.1)",
-        "surface_variant": "rgba(255, 255, 255, 0.15)",
-        "border": "rgba(255, 255, 255, 0.18)",
-        "hover": "rgba(255, 255, 255, 0.2)",
+        "surface": "#2d2d3d",  # Slightly lighter than bg for contrast
+        "surface_variant": "#3a3a4a",  # Even lighter for hover states
+        "border": "#4a4a5a",  # Subtle border color
+        "hover": "#3a3a5a",  # Slightly purple-tinged hover
         "success": "#10b981",
         "warning": "#f59e0b",
         "error": "#ef4444",
         "font": ("Segoe UI", 9),
         "heading_font": ("Segoe UI", 16, "semibold"),
         "radius": 16,
-        "blur": True
+        "blur": False  # Disable blur effect as it's not well supported
     },
     "neomorphism": {
         "name": "Neomorphism",
