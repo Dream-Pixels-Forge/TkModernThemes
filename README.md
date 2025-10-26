@@ -110,6 +110,9 @@ TkModernThemes includes 6 professionally designed themes, each optimized for dif
 <details>
 <summary>Click to expand</summary>
 
+          
+<img width="453" height="587" alt="Screenshot 2025-10-26 194251" src="https://github.com/user-attachments/assets/2b38ca52-81fc-4322-bf19-eacfe8a551e7" />
+
 **Style:** Frosted glass effect with deep purples and indigo  
 **Best For:** Modern web-style applications, dashboards, creative tools  
 **Vibe:** Sleek, professional, contemporary
@@ -128,6 +131,9 @@ theme.set_theme("glassmorphism")
 <details>
 <summary>Click to expand</summary>
 
+<img width="449" height="584" alt="Screenshot 2025-10-26 194222" src="https://github.com/user-attachments/assets/625b83c5-bc5c-454a-9663-86ce11443371" />
+
+
 **Style:** Soft 3D shadows and highlights for tactile feeling  
 **Best For:** Elegant interfaces, design-focused apps, portfolios  
 **Vibe:** Soft, tactile, refined
@@ -145,6 +151,9 @@ theme.set_theme("neomorphism")
 ### 3. ⚡ Cyberpunk
 <details>
 <summary>Click to expand</summary>
+
+<img width="456" height="588" alt="Screenshot 2025-10-26 194329" src="https://github.com/user-attachments/assets/1092424e-28a7-414b-bd37-6c09df99f785" />
+
 
 **Style:** High-contrast neon colors with dark backgrounds  
 **Best For:** Gaming apps, tech tools, futuristic interfaces  
@@ -165,6 +174,9 @@ theme.set_theme("cyberpunk")
 <details>
 <summary>Click to expand</summary>
 
+
+<img width="456" height="586" alt="Screenshot 2025-10-26 194408" src="https://github.com/user-attachments/assets/1678845c-49d6-43cd-89b5-8bcca7c364a3" />
+
 **Style:** Inspired by northern lights with vibrant gradients  
 **Best For:** Creative applications, media tools, portfolios  
 **Vibe:** Vibrant, artistic, dynamic
@@ -184,6 +196,10 @@ theme.set_theme("aurora")
 <details>
 <summary>Click to expand</summary>
 
+
+<img width="457" height="586" alt="Screenshot 2025-10-26 194501" src="https://github.com/user-attachments/assets/07a1880f-6f45-401b-a64f-eb8606a656f3" />
+
+
 **Style:** Clean, minimal design with teal accents  
 **Best For:** Productivity tools, note-taking apps, minimalist interfaces  
 **Vibe:** Clean, calm, focused
@@ -202,6 +218,9 @@ theme.set_theme("minimal_zen")
 ### 6. 💻 Dark Pro
 <details>
 <summary>Click to expand</summary>
+
+<img width="455" height="587" alt="Screenshot 2025-10-26 194534" src="https://github.com/user-attachments/assets/2ede4e20-0406-4759-b650-d8525e41e315" />
+
 
 **Style:** Professional dark theme similar to VS Code  
 **Best For:** Code editors, development tools, terminal apps  
