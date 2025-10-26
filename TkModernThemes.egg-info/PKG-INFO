@@ -1,41 +1,31 @@
 Metadata-Version: 2.4
 Name: TkModernThemes
-Version: 2.0.0
-Summary: Modern Tkinter Theme Library inspired by PySide6 and Nexus UI with 8 contemporary themes
-Home-page: https://github.com/yourusername/TkModernThemes
-Author: Your Name
-Author-email: your.email@example.com
-Project-URL: Bug Tracker, https://github.com/yourusername/TkModernThemes/issues
-Project-URL: Documentation, https://github.com/yourusername/TkModernThemes#readme
-Project-URL: Source Code, https://github.com/yourusername/TkModernThemes
-Project-URL: Demo, https://github.com/yourusername/TkModernThemes#demo
-Keywords: tkinter,themes,gui,ui,modern,design,pyside6,nexus,material,fluent,nord,dark-theme,light-theme,widgets,styling,ttk,desktop,cross-platform
+Version: 2.1.0
+Summary: Modern Tkinter Theme Library with 10+ beautiful themes including Cyberpunk, Glassmorphism, and Neomorphism
+Home-page: https://github.com/Dream-Pixels-Forge/TkModernThemes
+Author: Dream-Pixels-Forge
+Author-email: contact@dreampixelsforge.com
+Project-URL: Documentation, https://github.com/Dream-Pixels-Forge/TkModernThemes/wiki
+Project-URL: Source, https://github.com/Dream-Pixels-Forge/TkModernThemes
+Project-URL: Bug Reports, https://github.com/Dream-Pixels-Forge/TkModernThemes/issues
+Keywords: tkinter,themes,gui,cyberpunk,glassmorphism,neomorphism,modern-ui
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
-Classifier: Topic :: Software Development :: User Interfaces
-Classifier: Topic :: Software Development :: Libraries :: Python Modules
-Classifier: Topic :: Desktop Environment
 Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python :: 3
-Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
-Classifier: Programming Language :: Python :: 3.11
-Classifier: Programming Language :: Python :: 3.12
-Classifier: Operating System :: OS Independent
-Classifier: Environment :: X11 Applications
-Classifier: Environment :: Win32 (MS Windows)
-Classifier: Environment :: MacOS X
-Classifier: Framework :: tkinter
-Requires-Python: >=3.6
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: User Interfaces
+Classifier: Topic :: Desktop Environment :: Window Managers
+Requires-Python: >=3.7
 Description-Content-Type: text/markdown
-Provides-Extra: dev
-Requires-Dist: twine>=4.0.0; extra == "dev"
-Requires-Dist: wheel>=0.37.0; extra == "dev"
-Requires-Dist: setuptools>=60.0.0; extra == "dev"
-Requires-Dist: build>=0.7.0; extra == "dev"
+Requires-Dist: ttkthemes>=3.2.2
+Requires-Dist: pillow>=8.0.0
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
@@ -44,7 +34,7 @@ Dynamic: description-content-type
 Dynamic: home-page
 Dynamic: keywords
 Dynamic: project-url
-Dynamic: provides-extra
+Dynamic: requires-dist
 Dynamic: requires-python
 Dynamic: summary
 
@@ -52,14 +42,14 @@ Dynamic: summary
 
 <div align="center">
 
-![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v1.0.0-blue?style=for-the-badge)
-![Python Version](https://img.shields.io/badge/python-3.6+-brightgreen?style=for-the-badge&logo=python)
+![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v2.1.0-blue?style=for-the-badge)
+![Python Version](https://img.shields.io/badge/python-3.7+-brightgreen?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
 
-**A modern, beautiful theme library for Python Tkinter applications featuring 6 contemporary themes following 2025 design trends**
+**A modern, beautiful theme library for Python Tkinter applications featuring 10+ contemporary themes with advanced styling**
 
-[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes)
+[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes) • [Demo](#-demo)
 
 </div>
 
@@ -71,7 +61,7 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 
 ### ✨ Key Features
 
-- 🎭 **6 Professional Themes** - Glassmorphism, Neomorphism, Cyberpunk, Aurora, Minimal Zen, and Dark Pro
+- 🎭 **10+ Professional Themes** - Including Cyberpunk, Minimal Zen, Dark Pro, Glassmorphism, Neomorphism, and more
 - 🎯 **Complete Widget Coverage** - Every Tkinter/ttk widget fully themed and styled
 - ⚡ **Zero Dependencies** - Only requires Python's standard library
 - 🔄 **Dynamic Theme Switching** - Change themes on-the-fly without restarting
@@ -88,13 +78,16 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 
 ```bash
 pip install TkModernThemes
+
+# To install with additional features (blur effects, etc.)
+pip install TkModernThemes[full]
 ```
 
 ### Install from Source
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/TkModernThemes.git
+git clone https://github.com/Dream-Pixels-Forge/TkModernThemes.git
 cd TkModernThemes
 
 # Install in development mode
@@ -160,6 +153,9 @@ TkModernThemes includes 6 professionally designed themes, each optimized for dif
 <details>
 <summary>Click to expand</summary>
 
+          
+<img width="453" height="587" alt="Screenshot 2025-10-26 194251" src="https://github.com/user-attachments/assets/2b38ca52-81fc-4322-bf19-eacfe8a551e7" />
+
 **Style:** Frosted glass effect with deep purples and indigo  
 **Best For:** Modern web-style applications, dashboards, creative tools  
 **Vibe:** Sleek, professional, contemporary
@@ -177,6 +173,9 @@ theme.set_theme("glassmorphism")
 ### 2. 🎨 Neomorphism
 <details>
 <summary>Click to expand</summary>
+
+<img width="449" height="584" alt="Screenshot 2025-10-26 194222" src="https://github.com/user-attachments/assets/625b83c5-bc5c-454a-9663-86ce11443371" />
+
 
 **Style:** Soft 3D shadows and highlights for tactile feeling  
 **Best For:** Elegant interfaces, design-focused apps, portfolios  
@@ -196,33 +195,20 @@ theme.set_theme("neomorphism")
 <details>
 <summary>Click to expand</summary>
 
-**Style:** High-contrast neon colors with dark backgrounds  
-**Best For:** Gaming apps, tech tools, futuristic interfaces  
-**Vibe:** Bold, energetic, cutting-edge
+<img width="456" height="588" alt="Screenshot 2025-10-26 194329" src="https://github.com/user-attachments/assets/1092424e-28a7-414b-bd37-6c09df99f785" />
 
-**Colors:**
-- Background: `#0a0e27` (Deep black-blue)
-- Accent: `#ff2a6d` (Hot pink)
-- Secondary: `#05d9e8` (Cyan)
-- Text: `#00ff9f` (Neon green)
+
+**Style:** High-contrast neon colors with dark backgrounds  
 
 ```python
 theme.set_theme("cyberpunk")
 ```
-</details>
 
-### 4. 🌠 Aurora
-<details>
-<summary>Click to expand</summary>
-
-**Style:** Inspired by northern lights with vibrant gradients  
-**Best For:** Creative applications, media tools, portfolios  
-**Vibe:** Vibrant, artistic, dynamic
-
-**Colors:**
-- Background: `#0f1419` (Deep charcoal)
-- Accent: `#ff6b9d` (Pink)
-- Secondary: `#c38fff` (Purple)
+### 2. Minimal Zen
+**Style:** Clean, light theme with ample whitespace  
+**Best For:** Productivity apps, reading, documentation  
+**Vibe:** Calm, focused, distraction-free  
+**Key Colors:** Soft grays, blues, and whites
 - Border: `#7ee787` (Green)
 
 ```python
@@ -233,6 +219,10 @@ theme.set_theme("aurora")
 ### 5. 🧘 Minimal Zen
 <details>
 <summary>Click to expand</summary>
+
+
+<img width="457" height="586" alt="Screenshot 2025-10-26 194501" src="https://github.com/user-attachments/assets/07a1880f-6f45-401b-a64f-eb8606a656f3" />
+
 
 **Style:** Clean, minimal design with teal accents  
 **Best For:** Productivity tools, note-taking apps, minimalist interfaces  
@@ -252,6 +242,9 @@ theme.set_theme("minimal_zen")
 ### 6. 💻 Dark Pro
 <details>
 <summary>Click to expand</summary>
+
+<img width="455" height="587" alt="Screenshot 2025-10-26 194534" src="https://github.com/user-attachments/assets/2ede4e20-0406-4759-b650-d8525e41e315" />
+
 
 **Style:** Professional dark theme similar to VS Code  
 **Best For:** Code editors, development tools, terminal apps  
