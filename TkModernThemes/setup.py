@@ -8,24 +8,26 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="TkModernThemes",
-    version="1.0.0",
-    author="Dimona Patrick",
-    author_email="dream.pixels.forge@gmail.com",
-    description="Modern Tkinter Theme Library with 6 contemporary themes following 2025 design trends",
+    version="2.0.0",  # Updated version
+    author="Your Name",  # Replace with your name
+    author_email="your.email@example.com",  # Replace with your email
+    description="Modern Tkinter Theme Library inspired by PySide6 and Nexus UI with 8 contemporary themes",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Dream-Pixels-Forge/TkModernThemes",
+    url="https://github.com/yourusername/TkModernThemes",  # Replace with your repo URL
     project_urls={
-        "Bug Tracker": "https://github.com/Dream-Pixels-Forge/TkModernThemes/issues",
-        "Documentation": "https://github.com/Dream-Pixels-Forge/TkModernThemes#readme",
-        "Source Code": "https://github.com/Dream-Pixels-Forge/TkModernThemes",
+        "Bug Tracker": "https://github.com/yourusername/TkModernThemes/issues",
+        "Documentation": "https://github.com/yourusername/TkModernThemes#readme",
+        "Source Code": "https://github.com/yourusername/TkModernThemes",
+        "Demo": "https://github.com/yourusername/TkModernThemes#demo",
     },
     packages=find_packages(),
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",  # Updated status
         "Intended Audience :: Developers",
         "Topic :: Software Development :: User Interfaces",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: Desktop Environment",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
@@ -39,9 +41,29 @@ setup(
         "Environment :: X11 Applications",
         "Environment :: Win32 (MS Windows)",
         "Environment :: MacOS X",
+        "Framework :: tkinter",
     ],
     python_requires=">=3.6",
-    keywords="tkinter, themes, gui, ui, modern, design, glassmorphism, neomorphism, cyberpunk, dark-theme",
+    keywords=[
+        "tkinter",
+        "themes",
+        "gui",
+        "ui",
+        "modern",
+        "design",
+        "pyside6",
+        "nexus",
+        "material",
+        "fluent",
+        "nord",
+        "dark-theme",
+        "light-theme",
+        "widgets",
+        "styling",
+        "ttk",
+        "desktop",
+        "cross-platform"
+    ],
     install_requires=[
         # TkModernThemes has no external dependencies
         # tkinter comes with Python standard library
@@ -51,8 +73,14 @@ setup(
             "twine>=4.0.0",
             "wheel>=0.37.0",
             "setuptools>=60.0.0",
+            "build>=0.7.0",
         ],
     },
     include_package_data=True,
     zip_safe=False,
+    entry_points={
+        'console_scripts': [
+            'tkmodernthemes-demo=TkModernThemes:create_demo',
+        ],
+    },
 )

@@ -1,0 +1,2 @@
+[console_scripts]
+tkmodernthemes-demo = TkModernThemes:create_demo
