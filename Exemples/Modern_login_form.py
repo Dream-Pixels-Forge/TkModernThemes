@@ -14,7 +14,7 @@ root.resizable(False, False)
 
 # Apply theme
 theme = TKMT.ThemedTk(root)
-theme.set_theme("dark_pro")  # Choose from available themes
+theme.set_theme("nexus_dark")  # Choose from available themes
 
 # Main container
 main_frame = ttk.Frame(root, padding=40)
