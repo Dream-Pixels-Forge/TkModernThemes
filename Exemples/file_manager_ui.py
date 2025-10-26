@@ -1,5 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
+import sys
+import os
+
+# Add the parent directory to Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import TkModernThemes as TKMT
 
 root = tk.Tk()
@@ -7,7 +12,7 @@ root.title("File Manager")
 root.geometry("900x600")
 
 theme = TKMT.ThemedTk(root)
-theme.set_theme("aurora")
+theme.set_theme("nexus_dark")
 
 # Main container with sidebar
 main = ttk.Frame(root)

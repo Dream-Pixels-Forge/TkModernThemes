@@ -26,6 +26,93 @@ __all__ = ["ThemedTk", "THEMES", "create_card", "create_sidebar", "create_demo"]
 
 # Enhanced theme definitions with PySide6 and Nexus UI inspiration
 THEMES = {
+    "cyberpunk": {
+        "name": "Cyberpunk",
+        "bg": "#0a0a0f",
+        "fg": "#00ff9d",
+        "accent": "#ff2a6d",
+        "secondary": "#ff9d00",
+        "surface": "#151520",
+        "surface_variant": "#1e1e2e",
+        "border": "#2a2a40",
+        "hover": "#2a1a2e",
+        "success": "#00e6c7",
+        "warning": "#ffcc00",
+        "error": "#ff2a6d",
+        "font": ("Courier New", 10, "bold"),
+        "heading_font": ("Arial Black", 16, "bold"),
+        "radius": 6
+    },
+    "minimal_zen": {
+        "name": "Minimal Zen",
+        "bg": "#f8f9fa",
+        "fg": "#2d3436",
+        "accent": "#6c5ce7",
+        "secondary": "#a29bfe",
+        "surface": "#ffffff",
+        "surface_variant": "#f1f2f6",
+        "border": "#dfe6e9",
+        "hover": "#f1f2f6",
+        "success": "#00b894",
+        "warning": "#fdcb6e",
+        "error": "#ff7675",
+        "font": ("Inter", 9),
+        "heading_font": ("Inter", 16, "light"),
+        "radius": 4
+    },
+    "dark_pro": {
+        "name": "Dark Pro",
+        "bg": "#121212",
+        "fg": "#e0e0e0",
+        "accent": "#7c4dff",
+        "secondary": "#00bcd4",
+        "surface": "#1e1e1e",
+        "surface_variant": "#2d2d2d",
+        "border": "#3a3a3a",
+        "hover": "#2a2a2a",
+        "success": "#4caf50",
+        "warning": "#ff9800",
+        "error": "#f44336",
+        "font": ("Roboto", 9),
+        "heading_font": ("Roboto", 16, "medium"),
+        "radius": 6
+    },
+    "glassmorphism": {
+        "name": "Glassmorphism",
+        "bg": "rgba(255, 255, 255, 0.1)",
+        "fg": "#ffffff",
+        "accent": "#6366f1",
+        "secondary": "#8b5cf6",
+        "surface": "rgba(255, 255, 255, 0.1)",
+        "surface_variant": "rgba(255, 255, 255, 0.15)",
+        "border": "rgba(255, 255, 255, 0.18)",
+        "hover": "rgba(255, 255, 255, 0.2)",
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#ef4444",
+        "font": ("Segoe UI", 9),
+        "heading_font": ("Segoe UI", 16, "semibold"),
+        "radius": 16,
+        "blur": True
+    },
+    "neomorphism": {
+        "name": "Neomorphism",
+        "bg": "#e0e5ec",
+        "fg": "#4a4a4a",
+        "accent": "#5c6bc0",
+        "secondary": "#7e57c2",
+        "surface": "#e0e5ec",
+        "surface_variant": "#e4ebf5",
+        "border": "#d1d9e6",
+        "hover": "#f0f0f0",
+        "success": "#4caf50",
+        "warning": "#ff9800",
+        "error": "#f44336",
+        "font": ("Poppins", 9),
+        "heading_font": ("Poppins", 16, "medium"),
+        "radius": 12,
+        "shadow": "-6px -6px 12px #ffffff, 6px 6px 12px #a3b1c6"
+    },
     "nexus_dark": {
         "name": "Nexus Dark",
         "bg": "#0a0a0a",
@@ -198,8 +285,22 @@ class ThemedTk:
         self.current_theme = theme_name
         self._theme_data = theme
         
-        # Configure root window
+        # Get theme properties with defaults
+        blur_effect = theme.get("blur", False)
+        shadow_effect = theme.get("shadow", None)
+        radius = theme.get("radius", 4)
+        
+        # Configure root window with theme background
         self.root.configure(bg=theme["bg"])
+        
+        # Apply blur effect if supported and enabled
+        if blur_effect and hasattr(self.root, 'attributes'):
+            try:
+                # Windows-specific blur effect
+                self.root.attributes('-transparentcolor', theme["bg"])
+                self.root.attributes('-alpha', 0.98)
+            except:
+                pass  # Blur not supported on this platform
         
         # Use clam as base theme for better customization
         self.style.theme_use('clam')
@@ -214,18 +315,58 @@ class ThemedTk:
                            borderwidth=1,
                            relief="flat")
         
+        # Configure layout for frames with rounded corners
+        frame_layout = [
+            (
+                'Frame.border',
+                {
+                    'sticky': 'nswe',
+                    'border': str(radius),
+                    'children': [
+                        (
+                            'Frame.padding',
+                            {
+                                'sticky': 'nswe',
+                                'children': [
+                                    ('Frame.background', {'sticky': 'nswe'})
+                                ]
+                            }
+                        )
+                    ]
+                }
+            )
+        ]
+        self.style.layout('TFrame', frame_layout)
+        
         # TFrame - Base frames
         self.style.configure("TFrame",
                            background=theme["bg"],
                            borderwidth=0,
                            relief="flat")
         
-        # Card Frame - Elevated surface
-        self.style.configure("Card.TFrame",
-                           background=theme["surface"],
-                           relief="flat",
-                           borderwidth=1,
-                           bordercolor=theme["border"])
+        # Card Frame - Elevated surface with shadow
+        card_bg = theme["surface"]
+        if blur_effect and 'rgba' in card_bg:
+            # For glassmorphism effect
+            self.style.configure("Card.TFrame",
+                               background=card_bg,
+                               relief="flat",
+                               borderwidth=0)
+        else:
+            # Regular card with border
+            self.style.configure("Card.TFrame",
+                               background=theme["surface"],
+                               relief="flat",
+                               borderwidth=1,
+                               bordercolor=theme["border"])
+        
+        # Apply shadow effect if specified
+        if shadow_effect and not blur_effect:
+            self.style.configure("Card.TFrame",
+                               padding=(5, 5, 5, 5),
+                               borderwidth=0)
+            # Note: Actual shadow would be implemented with a canvas or custom widget
+            # This is a placeholder for the shadow effect
         
         # Sidebar Frame
         self.style.configure("Sidebar.TFrame",

@@ -2,14 +2,14 @@
 
 <div align="center">
 
-![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v1.0.0-blue?style=for-the-badge)
-![Python Version](https://img.shields.io/badge/python-3.6+-brightgreen?style=for-the-badge&logo=python)
+![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v2.1.0-blue?style=for-the-badge)
+![Python Version](https://img.shields.io/badge/python-3.7+-brightgreen?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
 
-**A modern, beautiful theme library for Python Tkinter applications featuring 6 contemporary themes following 2025 design trends**
+**A modern, beautiful theme library for Python Tkinter applications featuring 10+ contemporary themes with advanced styling**
 
-[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes)
+[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes) • [Demo](#-demo)
 
 </div>
 
@@ -21,7 +21,7 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 
 ### ✨ Key Features
 
-- 🎭 **6 Professional Themes** - Glassmorphism, Neomorphism, Cyberpunk, Aurora, Minimal Zen, and Dark Pro
+- 🎭 **10+ Professional Themes** - Including Cyberpunk, Minimal Zen, Dark Pro, Glassmorphism, Neomorphism, and more
 - 🎯 **Complete Widget Coverage** - Every Tkinter/ttk widget fully themed and styled
 - ⚡ **Zero Dependencies** - Only requires Python's standard library
 - 🔄 **Dynamic Theme Switching** - Change themes on-the-fly without restarting
@@ -38,6 +38,9 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 
 ```bash
 pip install TkModernThemes
+
+# To install with additional features (blur effects, etc.)
+pip install TkModernThemes[full]
 ```
 
 ### Install from Source
@@ -156,35 +159,16 @@ theme.set_theme("neomorphism")
 
 
 **Style:** High-contrast neon colors with dark backgrounds  
-**Best For:** Gaming apps, tech tools, futuristic interfaces  
-**Vibe:** Bold, energetic, cutting-edge
-
-**Colors:**
-- Background: `#0a0e27` (Deep black-blue)
-- Accent: `#ff2a6d` (Hot pink)
-- Secondary: `#05d9e8` (Cyan)
-- Text: `#00ff9f` (Neon green)
 
 ```python
 theme.set_theme("cyberpunk")
 ```
-</details>
 
-### 4. 🌠 Aurora
-<details>
-<summary>Click to expand</summary>
-
-
-<img width="456" height="586" alt="Screenshot 2025-10-26 194408" src="https://github.com/user-attachments/assets/1678845c-49d6-43cd-89b5-8bcca7c364a3" />
-
-**Style:** Inspired by northern lights with vibrant gradients  
-**Best For:** Creative applications, media tools, portfolios  
-**Vibe:** Vibrant, artistic, dynamic
-
-**Colors:**
-- Background: `#0f1419` (Deep charcoal)
-- Accent: `#ff6b9d` (Pink)
-- Secondary: `#c38fff` (Purple)
+### 2. Minimal Zen
+**Style:** Clean, light theme with ample whitespace  
+**Best For:** Productivity apps, reading, documentation  
+**Vibe:** Calm, focused, distraction-free  
+**Key Colors:** Soft grays, blues, and whites
 - Border: `#7ee787` (Green)
 
 ```python
