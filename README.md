@@ -1,47 +1,70 @@
-🎨 TkModernThemes
+# 🎨 TkModernThemes
+
 <div align="center">
-Show Image
-Show Image
-Show Image
-Show Image
-A modern, beautiful theme library for Python Tkinter applications featuring 6 contemporary themes following 2025 design trends
-Installation • Quick Start • Documentation • Examples • Themes
+
+![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v1.0.0-blue?style=for-the-badge)
+![Python Version](https://img.shields.io/badge/python-3.6+-brightgreen?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
+
+**A modern, beautiful theme library for Python Tkinter applications featuring 6 contemporary themes following 2025 design trends**
+
+[Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes)
+
 </div>
 
-🌟 Why TkModernThemes?
+---
+
+## 🌟 Why TkModernThemes?
+
 Transform your Tkinter applications from dated to dazzling! TkModernThemes brings modern design aesthetics to Python's standard GUI library with zero external dependencies.
-✨ Key Features
 
-🎭 6 Professional Themes - Glassmorphism, Neomorphism, Cyberpunk, Aurora, Minimal Zen, and Dark Pro
-🎯 Complete Widget Coverage - Every Tkinter/ttk widget fully themed and styled
-⚡ Zero Dependencies - Only requires Python's standard library
-🔄 Dynamic Theme Switching - Change themes on-the-fly without restarting
-🎨 Modern Design Patterns - Card layouts, hover effects, smooth transitions
-📱 Responsive Components - Adaptive layouts that work with any window size
-🛠️ Easy Integration - Add modern themes with just 3 lines of code
-🎪 Interactive Demo - Built-in showcase of all themes and components
+### ✨ Key Features
 
+- 🎭 **6 Professional Themes** - Glassmorphism, Neomorphism, Cyberpunk, Aurora, Minimal Zen, and Dark Pro
+- 🎯 **Complete Widget Coverage** - Every Tkinter/ttk widget fully themed and styled
+- ⚡ **Zero Dependencies** - Only requires Python's standard library
+- 🔄 **Dynamic Theme Switching** - Change themes on-the-fly without restarting
+- 🎨 **Modern Design Patterns** - Card layouts, hover effects, smooth transitions
+- 📱 **Responsive Components** - Adaptive layouts that work with any window size
+- 🛠️ **Easy Integration** - Add modern themes with just 3 lines of code
+- 🎪 **Interactive Demo** - Built-in showcase of all themes and components
 
-📦 Installation
-Install from PyPI (Recommended)
-bashpip install TkModernThemes
-Install from Source
-bash# Clone the repository
+---
+
+## 📦 Installation
+
+### Install from PyPI (Recommended)
+
+```bash
+pip install TkModernThemes
+```
+
+### Install from Source
+
+```bash
+# Clone the repository
 git clone https://github.com/yourusername/TkModernThemes.git
 cd TkModernThemes
 
 # Install in development mode
 pip install -e .
-Manual Installation
+```
 
-Download the TkModernThemes folder
-Place it in your project directory
-Import and use!
+### Manual Installation
 
+1. Download the `TkModernThemes` folder
+2. Place it in your project directory
+3. Import and use!
 
-🚀 Quick Start
+---
+
+## 🚀 Quick Start
+
 Get started in less than 30 seconds:
-pythonimport tkinter as tk
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -63,149 +86,202 @@ ttk.Label(main_frame, text="Welcome to Modern Tkinter!",
 ttk.Button(main_frame, text="Get Started").pack()
 
 root.mainloop()
-🎪 Try the Interactive Demo
-pythonimport TkModernThemes as TKMT
+```
+
+### 🎪 Try the Interactive Demo
+
+```python
+import TkModernThemes as TKMT
 TKMT.create_demo()
+```
+
 Or from command line:
-bashpython -m TkModernThemes
+```bash
+python -m TkModernThemes
+```
 
-🎨 Themes
+---
+
+## 🎨 Themes
+
 TkModernThemes includes 6 professionally designed themes, each optimized for different use cases:
-1. 🌌 Glassmorphism
+
+### 1. 🌌 Glassmorphism
 <details>
 <summary>Click to expand</summary>
-Style: Frosted glass effect with deep purples and indigo
-Best For: Modern web-style applications, dashboards, creative tools
-Vibe: Sleek, professional, contemporary
-Colors:
 
-Background: #0f0f1e (Deep navy)
-Accent: #6366f1 (Indigo)
-Surface: #1a1a2e (Dark surface)
+**Style:** Frosted glass effect with deep purples and indigo  
+**Best For:** Modern web-style applications, dashboards, creative tools  
+**Vibe:** Sleek, professional, contemporary
 
-pythontheme.set_theme("glassmorphism")
+**Colors:**
+- Background: `#0f0f1e` (Deep navy)
+- Accent: `#6366f1` (Indigo)
+- Surface: `#1a1a2e` (Dark surface)
+
+```python
+theme.set_theme("glassmorphism")
+```
 </details>
-2. 🎨 Neomorphism
+
+### 2. 🎨 Neomorphism
 <details>
 <summary>Click to expand</summary>
-Style: Soft 3D shadows and highlights for tactile feeling
-Best For: Elegant interfaces, design-focused apps, portfolios
-Vibe: Soft, tactile, refined
-Colors:
 
-Background: #e0e5ec (Soft gray)
-Accent: #6c5ce7 (Purple)
-Surface: #e0e5ec (Matching background)
+**Style:** Soft 3D shadows and highlights for tactile feeling  
+**Best For:** Elegant interfaces, design-focused apps, portfolios  
+**Vibe:** Soft, tactile, refined
 
-pythontheme.set_theme("neomorphism")
+**Colors:**
+- Background: `#e0e5ec` (Soft gray)
+- Accent: `#6c5ce7` (Purple)
+- Surface: `#e0e5ec` (Matching background)
+
+```python
+theme.set_theme("neomorphism")
+```
 </details>
-3. ⚡ Cyberpunk
+
+### 3. ⚡ Cyberpunk
 <details>
 <summary>Click to expand</summary>
-Style: High-contrast neon colors with dark backgrounds
-Best For: Gaming apps, tech tools, futuristic interfaces
-Vibe: Bold, energetic, cutting-edge
-Colors:
 
-Background: #0a0e27 (Deep black-blue)
-Accent: #ff2a6d (Hot pink)
-Secondary: #05d9e8 (Cyan)
-Text: #00ff9f (Neon green)
+**Style:** High-contrast neon colors with dark backgrounds  
+**Best For:** Gaming apps, tech tools, futuristic interfaces  
+**Vibe:** Bold, energetic, cutting-edge
 
-pythontheme.set_theme("cyberpunk")
+**Colors:**
+- Background: `#0a0e27` (Deep black-blue)
+- Accent: `#ff2a6d` (Hot pink)
+- Secondary: `#05d9e8` (Cyan)
+- Text: `#00ff9f` (Neon green)
+
+```python
+theme.set_theme("cyberpunk")
+```
 </details>
-4. 🌠 Aurora
+
+### 4. 🌠 Aurora
 <details>
 <summary>Click to expand</summary>
-Style: Inspired by northern lights with vibrant gradients
-Best For: Creative applications, media tools, portfolios
-Vibe: Vibrant, artistic, dynamic
-Colors:
 
-Background: #0f1419 (Deep charcoal)
-Accent: #ff6b9d (Pink)
-Secondary: #c38fff (Purple)
-Border: #7ee787 (Green)
+**Style:** Inspired by northern lights with vibrant gradients  
+**Best For:** Creative applications, media tools, portfolios  
+**Vibe:** Vibrant, artistic, dynamic
 
-pythontheme.set_theme("aurora")
+**Colors:**
+- Background: `#0f1419` (Deep charcoal)
+- Accent: `#ff6b9d` (Pink)
+- Secondary: `#c38fff` (Purple)
+- Border: `#7ee787` (Green)
+
+```python
+theme.set_theme("aurora")
+```
 </details>
-5. 🧘 Minimal Zen
+
+### 5. 🧘 Minimal Zen
 <details>
 <summary>Click to expand</summary>
-Style: Clean, minimal design with teal accents
-Best For: Productivity tools, note-taking apps, minimalist interfaces
-Vibe: Clean, calm, focused
-Colors:
 
-Background: #fafafa (Off-white)
-Accent: #2dd4bf (Teal)
-Surface: #ffffff (Pure white)
-Text: #1a1a1a (Near black)
+**Style:** Clean, minimal design with teal accents  
+**Best For:** Productivity tools, note-taking apps, minimalist interfaces  
+**Vibe:** Clean, calm, focused
 
-pythontheme.set_theme("minimal_zen")
+**Colors:**
+- Background: `#fafafa` (Off-white)
+- Accent: `#2dd4bf` (Teal)
+- Surface: `#ffffff` (Pure white)
+- Text: `#1a1a1a` (Near black)
+
+```python
+theme.set_theme("minimal_zen")
+```
 </details>
-6. 💻 Dark Pro
+
+### 6. 💻 Dark Pro
 <details>
 <summary>Click to expand</summary>
-Style: Professional dark theme similar to VS Code
-Best For: Code editors, development tools, terminal apps
-Vibe: Professional, focused, developer-friendly
-Colors:
 
-Background: #1e1e1e (VS Code dark)
-Accent: #007acc (Blue)
-Surface: #252526 (Slightly lighter)
-Text: #d4d4d4 (Light gray)
+**Style:** Professional dark theme similar to VS Code  
+**Best For:** Code editors, development tools, terminal apps  
+**Vibe:** Professional, focused, developer-friendly
 
-pythontheme.set_theme("dark_pro")
+**Colors:**
+- Background: `#1e1e1e` (VS Code dark)
+- Accent: `#007acc` (Blue)
+- Surface: `#252526` (Slightly lighter)
+- Text: `#d4d4d4` (Light gray)
+
+```python
+theme.set_theme("dark_pro")
+```
 </details>
 
-📚 Documentation
-Core Classes and Functions
-ThemedTk(root)
+---
+
+## 📚 Documentation
+
+### Core Classes and Functions
+
+#### `ThemedTk(root)`
 Main theme manager class.
-pythontheme = TKMT.ThemedTk(root)
-Parameters:
 
-root - Your Tkinter root window or Toplevel widget
+```python
+theme = TKMT.ThemedTk(root)
+```
 
-Methods:
+**Parameters:**
+- `root` - Your Tkinter root window or Toplevel widget
 
-set_theme(theme_name) - Apply a theme
-get_theme_list() - Get list of available themes
-get_current_theme() - Get name of current theme
-get_theme_colors(theme_name=None) - Get color dictionary
-create_card(parent, **kwargs) - Create a styled card component
+**Methods:**
+- `set_theme(theme_name)` - Apply a theme
+- `get_theme_list()` - Get list of available themes
+- `get_current_theme()` - Get name of current theme
+- `get_theme_colors(theme_name=None)` - Get color dictionary
+- `create_card(parent, **kwargs)` - Create a styled card component
 
+---
 
-Methods Reference
-set_theme(theme_name)
+### Methods Reference
+
+#### `set_theme(theme_name)`
 Apply a theme to your application.
-pythontheme.set_theme("glassmorphism")
-Parameters:
 
-theme_name (str) - Name of theme: "glassmorphism", "neomorphism", "cyberpunk", "aurora", "minimal_zen", or "dark_pro"
+```python
+theme.set_theme("glassmorphism")
+```
 
-Raises:
+**Parameters:**
+- `theme_name` (str) - Name of theme: `"glassmorphism"`, `"neomorphism"`, `"cyberpunk"`, `"aurora"`, `"minimal_zen"`, or `"dark_pro"`
 
-ValueError - If theme name is invalid
+**Raises:**
+- `ValueError` - If theme name is invalid
 
-Example:
-python# Apply different themes
+**Example:**
+```python
+# Apply different themes
 theme.set_theme("cyberpunk")      # Neon cyberpunk style
 theme.set_theme("minimal_zen")    # Clean minimal style
 theme.set_theme("dark_pro")       # Professional dark theme
+```
 
-get_theme_list()
+---
+
+#### `get_theme_list()`
 Get all available theme names.
-pythonthemes = theme.get_theme_list()
+
+```python
+themes = theme.get_theme_list()
 print(themes)  # ['glassmorphism', 'neomorphism', 'cyberpunk', ...]
-Returns:
+```
 
-list - List of theme name strings
+**Returns:**
+- `list` - List of theme name strings
 
-Example:
-python# Create a theme selector dropdown
+**Example:**
+```python
+# Create a theme selector dropdown
 theme_var = tk.StringVar()
 theme_selector = ttk.Combobox(
     frame,
@@ -213,58 +289,77 @@ theme_selector = ttk.Combobox(
     values=theme.get_theme_list(),
     state="readonly"
 )
+```
 
-get_current_theme()
+---
+
+#### `get_current_theme()`
 Get the name of currently active theme.
-pythoncurrent = theme.get_current_theme()
+
+```python
+current = theme.get_current_theme()
 print(f"Current theme: {current}")  # "glassmorphism"
-Returns:
+```
 
-str or None - Current theme name, or None if no theme applied
+**Returns:**
+- `str` or `None` - Current theme name, or None if no theme applied
 
+---
 
-get_theme_colors(theme_name=None)
+#### `get_theme_colors(theme_name=None)`
 Get color dictionary for a theme.
-python# Get current theme colors
+
+```python
+# Get current theme colors
 colors = theme.get_theme_colors()
 print(colors['accent'])  # '#6366f1'
 
 # Get specific theme colors
 cyber_colors = theme.get_theme_colors('cyberpunk')
 print(cyber_colors['bg'])  # '#0a0e27'
-Parameters:
+```
 
-theme_name (str, optional) - Theme name. Uses current theme if None.
+**Parameters:**
+- `theme_name` (str, optional) - Theme name. Uses current theme if None.
 
-Returns:
+**Returns:**
+- `dict` - Dictionary containing: `bg`, `fg`, `accent`, `secondary`, `surface`, `border`, `hover`, `font`, `heading_font`
 
-dict - Dictionary containing: bg, fg, accent, secondary, surface, border, hover, font, heading_font
+---
 
-
-create_card(parent, **kwargs)
+#### `create_card(parent, **kwargs)`
 Create a styled card frame component.
-pythoncard = theme.create_card(parent_frame, padding=20)
+
+```python
+card = theme.create_card(parent_frame, padding=20)
 card.pack(fill=tk.X, pady=10)
-Parameters:
+```
 
-parent - Parent widget
-**kwargs - Additional ttk.Frame arguments (padding, width, etc.)
+**Parameters:**
+- `parent` - Parent widget
+- `**kwargs` - Additional ttk.Frame arguments (padding, width, etc.)
 
-Returns:
+**Returns:**
+- `ttk.Frame` - Styled frame with Card.TFrame style
 
-ttk.Frame - Styled frame with Card.TFrame style
-
-Example:
-python# Create multiple cards
+**Example:**
+```python
+# Create multiple cards
 for i in range(3):
     card = theme.create_card(main_frame, padding=20)
     card.pack(fill=tk.X, pady=10)
     ttk.Label(card, text=f"Card {i+1}").pack()
+```
 
-Widget Styles
+---
+
+### Widget Styles
+
 TkModernThemes provides pre-configured styles for all ttk widgets:
-Labels
-python# Regular label
+
+#### Labels
+```python
+# Regular label
 ttk.Label(frame, text="Regular text")
 
 # Heading label (larger, accent color)
@@ -272,14 +367,20 @@ ttk.Label(frame, text="Section Title", style="Heading.TLabel")
 
 # Card label (for use inside cards)
 ttk.Label(card, text="Card content", style="Card.TLabel")
-Buttons
-python# Primary button (accent color)
+```
+
+#### Buttons
+```python
+# Primary button (accent color)
 ttk.Button(frame, text="Primary Action")
 
 # Secondary button (outlined style)
 ttk.Button(frame, text="Secondary", style="Secondary.TButton")
-Input Fields
-python# Entry field
+```
+
+#### Input Fields
+```python
+# Entry field
 email_entry = ttk.Entry(frame, width=30)
 
 # Password entry
@@ -287,22 +388,31 @@ password_entry = ttk.Entry(frame, width=30, show="*")
 
 # Combobox (dropdown)
 options = ttk.Combobox(frame, values=["Option 1", "Option 2"], state="readonly")
-Selection Widgets
-python# Checkbox
+```
+
+#### Selection Widgets
+```python
+# Checkbox
 ttk.Checkbutton(frame, text="Remember me")
 
 # Radio button
 gender_var = tk.StringVar()
 ttk.Radiobutton(frame, text="Male", variable=gender_var, value="male")
 ttk.Radiobutton(frame, text="Female", variable=gender_var, value="female")
-Progress & Controls
-python# Progress bar
+```
+
+#### Progress & Controls
+```python
+# Progress bar
 progress = ttk.Progressbar(frame, length=300, mode='determinate', value=50)
 
 # Slider/Scale
 volume = ttk.Scale(frame, from_=0, to=100, orient=tk.HORIZONTAL)
-Containers
-python# Frame
+```
+
+#### Containers
+```python
+# Frame
 content_frame = ttk.Frame(root, padding=20)
 
 # Card frame (elevated, styled)
@@ -312,10 +422,16 @@ card = theme.create_card(root, padding=20)
 notebook = ttk.Notebook(frame)
 tab1 = ttk.Frame(notebook)
 notebook.add(tab1, text="Tab 1")
+```
 
-💡 Examples
-Example 1: Modern Login Form
-pythonimport tkinter as tk
+---
+
+## 💡 Examples
+
+### Example 1: Modern Login Form
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -370,9 +486,14 @@ ttk.Label(card, text="Forgot password?",
           style="Card.TLabel").pack(pady=(20, 0))
 
 root.mainloop()
+```
 
-Example 2: Dashboard with Stats Cards
-pythonimport tkinter as tk
+---
+
+### Example 2: Dashboard with Stats Cards
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -443,9 +564,14 @@ for month in ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]:
                    value=50 + (hash(month) % 40)).pack(side=tk.LEFT, padx=10)
 
 root.mainloop()
+```
 
-Example 3: Settings Panel
-pythonimport tkinter as tk
+---
+
+### Example 3: Settings Panel
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -507,9 +633,14 @@ ttk.Button(button_frame, text="Cancel",
           style="Secondary.TButton").pack(side=tk.RIGHT)
 
 root.mainloop()
+```
 
-Example 4: File Manager UI
-pythonimport tkinter as tk
+---
+
+### Example 4: File Manager UI
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -577,9 +708,14 @@ for i, (name, size, type_) in enumerate(files):
              style="Card.TLabel").pack(pady=5)
 
 root.mainloop()
+```
 
-Example 5: Theme Switcher App
-pythonimport tkinter as tk
+---
+
+### Example 5: Theme Switcher App
+
+```python
+import tkinter as tk
 from tkinter import ttk
 import TkModernThemes as TKMT
 
@@ -668,23 +804,31 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = ThemeSwitcherApp(root)
     root.mainloop()
+```
 
-🎯 Use Cases
+---
+
+## 🎯 Use Cases
+
 TkModernThemes is perfect for:
 
-📊 Data Visualization Tools - Dashboards, analytics platforms
-🎮 Gaming Utilities - Launchers, mod managers, game tools
-💼 Business Applications - CRM, inventory systems, admin panels
-🎨 Creative Tools - Image editors, design utilities, media players
-📝 Productivity Apps - Note-taking, task managers, editors
-🔧 System Utilities - File managers, system monitors, config tools
-🎓 Educational Software - Learning platforms, quiz apps, tutorials
-💻 Developer Tools - Code editors, API testers, database clients
+- 📊 **Data Visualization Tools** - Dashboards, analytics platforms
+- 🎮 **Gaming Utilities** - Launchers, mod managers, game tools
+- 💼 **Business Applications** - CRM, inventory systems, admin panels
+- 🎨 **Creative Tools** - Image editors, design utilities, media players
+- 📝 **Productivity Apps** - Note-taking, task managers, editors
+- 🔧 **System Utilities** - File managers, system monitors, config tools
+- 🎓 **Educational Software** - Learning platforms, quiz apps, tutorials
+- 💻 **Developer Tools** - Code editors, API testers, database clients
 
+---
 
-🔧 Advanced Usage
-Custom Color Schemes
-pythonimport TkModernThemes as TKMT
+## 🔧 Advanced Usage
+
+### Custom Color Schemes
+
+```python
+import TkModernThemes as TKMT
 
 # Access and modify theme colors
 TKMT.THEMES['glassmorphism']['accent'] = '#ff0000'  # Change accent to red
@@ -693,8 +837,12 @@ TKMT.THEMES['glassmorphism']['bg'] = '#000000'  # Change background to black
 # Apply modified theme
 theme = TKMT.ThemedTk(root)
 theme.set_theme('glassmorphism')
-Creating Your Own Theme
-pythonimport TkModernThemes as TKMT
+```
+
+### Creating Your Own Theme
+
+```python
+import TkModernThemes as TKMT
 
 # Add a custom theme
 TKMT.THEMES['my_theme'] = {
@@ -713,8 +861,12 @@ TKMT.THEMES['my_theme'] = {
 # Use your custom theme
 theme = TKMT.ThemedTk(root)
 theme.set_theme('my_theme')
-Dynamic Theme Switching
-pythondef create_theme_menu(menubar, theme_manager):
+```
+
+### Dynamic Theme Switching
+
+```python
+def create_theme_menu(menubar, theme_manager):
     """Create a menu for theme switching"""
     theme_menu = tk.Menu(menubar, tearoff=0)
     menubar.add_cascade(label="Themes", menu=theme_menu)
@@ -724,3 +876,6 @@ pythondef create_theme_menu(menubar, theme_manager):
             label=theme_name.replace('_', ' ').title(),
             command=lambda t=theme_name: theme_manager.set_theme(t)
         )
+```
+
+###
