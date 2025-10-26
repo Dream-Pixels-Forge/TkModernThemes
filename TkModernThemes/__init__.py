@@ -292,6 +292,32 @@ class ThemedTk:
         shadow_effect = theme.get("shadow", None)
         radius = theme.get("radius", 4)
 
+        # Helper function to convert RGBA to RGB if needed
+        def get_rgb_color(color):
+            if isinstance(color, str):
+                if color.startswith('rgba'):
+                    # Extract RGBA values and convert to hex
+                    rgba = color[5:-1].split(',')
+                    r, g, b = map(int, rgba[:3])
+                    return f'#{r:02x}{g:02x}{b:02x}'
+                elif color.startswith('rgb('):
+                    # Handle rgb() format if needed
+                    rgb = color[4:-1].split(',')
+                    r, g, b = map(int, rgb)
+                    return f'#{r:02x}{g:02x}{b:02x}'
+            return color
+            
+        # Convert all theme colors to RGB
+        theme_colors = {}
+        for key, value in theme.items():
+            if isinstance(value, str) and ('color' in key or 'bg' in key or 'fg' in key or 'border' in key):
+                theme_colors[key] = get_rgb_color(value)
+            else:
+                theme_colors[key] = value
+                
+        # Update theme with converted colors
+        theme.update(theme_colors)
+            
         # Configure root window with theme background
         self.root.configure(bg=theme["bg"])
 
@@ -309,13 +335,13 @@ class ThemedTk:
 
         # Configure base elements with modern styling
         self.style.configure(".",
-                             background=theme["bg"],
-                             foreground=theme["fg"],
-                             fieldbackground=theme["surface"],
-                             bordercolor=theme["border"],
-                             font=theme["font"],
-                             borderwidth=1,
-                             relief="flat")
+                           background=theme["bg"],
+                           foreground=theme["fg"],
+                           fieldbackground=theme["surface"],
+                           bordercolor=theme["border"],
+                           font=theme["font"],
+                           borderwidth=1,
+                           relief="flat")
 
         # Configure layout for frames with rounded corners
         frame_layout = [
