@@ -1,0 +1,5 @@
+
+[dev]
+twine>=4.0.0
+wheel>=0.37.0
+setuptools>=60.0.0

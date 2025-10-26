@@ -1,0 +1,8 @@
+README.md
+setup.py
+TkModernThemes.egg-info/PKG-INFO
+TkModernThemes.egg-info/SOURCES.txt
+TkModernThemes.egg-info/dependency_links.txt
+TkModernThemes.egg-info/not-zip-safe
+TkModernThemes.egg-info/requires.txt
+TkModernThemes.egg-info/top_level.txt
