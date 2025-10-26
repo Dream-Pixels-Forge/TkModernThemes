@@ -21,7 +21,8 @@ from tkinter import ttk
 
 __version__ = "2.0.0"
 __author__ = "TkModernThemes"
-__all__ = ["ThemedTk", "THEMES", "create_card", "create_sidebar", "create_demo"]
+__all__ = ["ThemedTk", "THEMES", "create_card",
+           "create_sidebar", "create_demo"]
 
 
 # Enhanced theme definitions with PySide6 and Nexus UI inspiration
@@ -254,11 +255,11 @@ THEMES = {
 
 class ThemedTk:
     """Advanced theme manager with PySide6 and Nexus UI inspired styling"""
-    
+
     def __init__(self, root):
         """
         Initialize the theme manager
-        
+
         Args:
             root: Tkinter root window or Toplevel widget
         """
@@ -266,33 +267,34 @@ class ThemedTk:
         self.current_theme = None
         self.style = ttk.Style()
         self._theme_data = None
-        
+
     def set_theme(self, theme_name):
         """
         Apply a theme to the Tkinter window
-        
+
         Args:
             theme_name: Name of the theme to apply
-            
+
         Raises:
             ValueError: If theme name is not found
         """
         if theme_name not in THEMES:
             available = ", ".join(THEMES.keys())
-            raise ValueError(f"Theme '{theme_name}' not found. Available themes: {available}")
-        
+            raise ValueError(
+                f"Theme '{theme_name}' not found. Available themes: {available}")
+
         theme = THEMES[theme_name]
         self.current_theme = theme_name
         self._theme_data = theme
-        
+
         # Get theme properties with defaults
         blur_effect = theme.get("blur", False)
         shadow_effect = theme.get("shadow", None)
         radius = theme.get("radius", 4)
-        
+
         # Configure root window with theme background
         self.root.configure(bg=theme["bg"])
-        
+
         # Apply blur effect if supported and enabled
         if blur_effect and hasattr(self.root, 'attributes'):
             try:
@@ -301,20 +303,20 @@ class ThemedTk:
                 self.root.attributes('-alpha', 0.98)
             except:
                 pass  # Blur not supported on this platform
-        
+
         # Use clam as base theme for better customization
         self.style.theme_use('clam')
-        
+
         # Configure base elements with modern styling
         self.style.configure(".",
-                           background=theme["bg"],
-                           foreground=theme["fg"],
-                           fieldbackground=theme["surface"],
-                           bordercolor=theme["border"],
-                           font=theme["font"],
-                           borderwidth=1,
-                           relief="flat")
-        
+                             background=theme["bg"],
+                             foreground=theme["fg"],
+                             fieldbackground=theme["surface"],
+                             bordercolor=theme["border"],
+                             font=theme["font"],
+                             borderwidth=1,
+                             relief="flat")
+
         # Configure layout for frames with rounded corners
         frame_layout = [
             (
@@ -337,409 +339,410 @@ class ThemedTk:
             )
         ]
         self.style.layout('TFrame', frame_layout)
-        
+
         # TFrame - Base frames
         self.style.configure("TFrame",
-                           background=theme["bg"],
-                           borderwidth=0,
-                           relief="flat")
-        
+                             background=theme["bg"],
+                             borderwidth=0,
+                             relief="flat")
+
         # Card Frame - Elevated surface with shadow
         card_bg = theme["surface"]
         if blur_effect and 'rgba' in card_bg:
             # For glassmorphism effect
             self.style.configure("Card.TFrame",
-                               background=card_bg,
-                               relief="flat",
-                               borderwidth=0)
+                                 background=card_bg,
+                                 relief="flat",
+                                 borderwidth=0)
         else:
             # Regular card with border
             self.style.configure("Card.TFrame",
-                               background=theme["surface"],
-                               relief="flat",
-                               borderwidth=1,
-                               bordercolor=theme["border"])
-        
+                                 background=theme["surface"],
+                                 relief="flat",
+                                 borderwidth=1,
+                                 bordercolor=theme["border"])
+
         # Apply shadow effect if specified
         if shadow_effect and not blur_effect:
             self.style.configure("Card.TFrame",
-                               padding=(5, 5, 5, 5),
-                               borderwidth=0)
+                                 padding=(5, 5, 5, 5),
+                                 borderwidth=0)
             # Note: Actual shadow would be implemented with a canvas or custom widget
             # This is a placeholder for the shadow effect
-        
+
         # Sidebar Frame
         self.style.configure("Sidebar.TFrame",
-                           background=theme["surface_variant"],
-                           relief="flat")
-        
+                             background=theme["surface_variant"],
+                             relief="flat")
+
         # Toolbar Frame
         self.style.configure("Toolbar.TFrame",
-                           background=theme["surface"],
-                           relief="flat",
-                           borderwidth=0)
-        
+                             background=theme["surface"],
+                             relief="flat",
+                             borderwidth=0)
+
         # TLabel - All label variants
         self.style.configure("TLabel",
-                           background=theme["bg"],
-                           foreground=theme["fg"],
-                           font=theme["font"],
-                           padding=2)
-        
+                             background=theme["bg"],
+                             foreground=theme["fg"],
+                             font=theme["font"],
+                             padding=2)
+
         self.style.configure("Heading.TLabel",
-                           font=theme["heading_font"],
-                           foreground=theme["accent"],
-                           background=theme["bg"])
-        
+                             font=theme["heading_font"],
+                             foreground=theme["accent"],
+                             background=theme["bg"])
+
         self.style.configure("Card.TLabel",
-                           background=theme["surface"],
-                           foreground=theme["fg"])
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"])
+
         self.style.configure("Sidebar.TLabel",
-                           background=theme["surface_variant"],
-                           foreground=theme["fg"])
-        
+                             background=theme["surface_variant"],
+                             foreground=theme["fg"])
+
         self.style.configure("Muted.TLabel",
-                           background=theme["bg"],
-                           foreground=theme["border"])
-        
+                             background=theme["bg"],
+                             foreground=theme["border"])
+
         # Success/Warning/Error labels
         self.style.configure("Success.TLabel",
-                           background=theme["bg"],
-                           foreground=theme["success"])
-        
+                             background=theme["bg"],
+                             foreground=theme["success"])
+
         self.style.configure("Warning.TLabel",
-                           background=theme["bg"],
-                           foreground=theme["warning"])
-        
+                             background=theme["bg"],
+                             foreground=theme["warning"])
+
         self.style.configure("Error.TLabel",
-                           background=theme["bg"],
-                           foreground=theme["error"])
-        
+                             background=theme["bg"],
+                             foreground=theme["error"])
+
         # TButton - Modern button styling
         self.style.configure("TButton",
-                           background=theme["accent"],
-                           foreground="#ffffff",
-                           borderwidth=0,
-                           focuscolor=theme["accent"],
-                           padding=(16, 8),
-                           font=theme["font"],
-                           relief="flat")
-        
+                             background=theme["accent"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             focuscolor=theme["accent"],
+                             padding=(16, 8),
+                             font=theme["font"],
+                             relief="flat")
+
         self.style.map("TButton",
-                      background=[("active", theme["secondary"]),
-                                ("pressed", theme["accent"]),
-                                ("disabled", theme["border"])],
-                      foreground=[("disabled", theme["fg"])],
-                      relief=[("pressed", "flat")])
-        
+                       background=[("active", theme["secondary"]),
+                                   ("pressed", theme["accent"]),
+                                   ("disabled", theme["border"])],
+                       foreground=[("disabled", theme["fg"])],
+                       relief=[("pressed", "flat")])
+
         # Secondary button - Outlined style
         self.style.configure("Secondary.TButton",
-                           background=theme["surface"],
-                           foreground=theme["fg"],
-                           borderwidth=1,
-                           bordercolor=theme["border"],
-                           padding=(16, 8))
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"],
+                             borderwidth=1,
+                             bordercolor=theme["border"],
+                             padding=(16, 8))
+
         self.style.map("Secondary.TButton",
-                      background=[("active", theme["hover"]),
-                                ("pressed", theme["surface"])],
-                      bordercolor=[("active", theme["accent"]),
-                                 ("pressed", theme["accent"])])
-        
+                       background=[("active", theme["hover"]),
+                                   ("pressed", theme["surface"])],
+                       bordercolor=[("active", theme["accent"]),
+                                    ("pressed", theme["accent"])])
+
         # Accent button
         self.style.configure("Accent.TButton",
-                           background=theme["secondary"],
-                           foreground="#ffffff",
-                           borderwidth=0,
-                           padding=(16, 8))
-        
+                             background=theme["secondary"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             padding=(16, 8))
+
         self.style.map("Accent.TButton",
-                      background=[("active", theme["accent"]),
-                                ("pressed", theme["secondary"])])
-        
+                       background=[("active", theme["accent"]),
+                                   ("pressed", theme["secondary"])])
+
         # Success/Warning/Error buttons
         self.style.configure("Success.TButton",
-                           background=theme["success"],
-                           foreground="#ffffff",
-                           borderwidth=0,
-                           padding=(16, 8))
-        
+                             background=theme["success"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             padding=(16, 8))
+
         self.style.configure("Warning.TButton",
-                           background=theme["warning"],
-                           foreground="#ffffff",
-                           borderwidth=0,
-                           padding=(16, 8))
-        
+                             background=theme["warning"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             padding=(16, 8))
+
         self.style.configure("Error.TButton",
-                           background=theme["error"],
-                           foreground="#ffffff",
-                           borderwidth=0,
-                           padding=(16, 8))
-        
+                             background=theme["error"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             padding=(16, 8))
+
         # TEntry - Modern input fields
         self.style.configure("TEntry",
-                           fieldbackground=theme["surface"],
-                           foreground=theme["fg"],
-                           bordercolor=theme["border"],
-                           lightcolor=theme["surface"],
-                           darkcolor=theme["surface"],
-                           insertcolor=theme["accent"],
-                           padding=10,
-                           relief="flat")
-        
+                             fieldbackground=theme["surface"],
+                             foreground=theme["fg"],
+                             bordercolor=theme["border"],
+                             lightcolor=theme["surface"],
+                             darkcolor=theme["surface"],
+                             insertcolor=theme["accent"],
+                             padding=10,
+                             relief="flat")
+
         self.style.map("TEntry",
-                      fieldbackground=[("focus", theme["surface"]),
-                                     ("readonly", theme["surface_variant"])],
-                      bordercolor=[("focus", theme["accent"]),
-                                 ("invalid", theme["error"])],
-                      lightcolor=[("focus", theme["accent"])],
-                      darkcolor=[("focus", theme["accent"])])
-        
+                       fieldbackground=[("focus", theme["surface"]),
+                                        ("readonly", theme["surface_variant"])],
+                       bordercolor=[("focus", theme["accent"]),
+                                    ("invalid", theme["error"])],
+                       lightcolor=[("focus", theme["accent"])],
+                       darkcolor=[("focus", theme["accent"])])
+
         # TCheckbutton - Modern checkbox
         self.style.configure("TCheckbutton",
-                           background=theme["bg"],
-                           foreground=theme["fg"],
-                           indicatorcolor=theme["surface"],
-                           bordercolor=theme["border"],
-                           padding=5)
-        
+                             background=theme["bg"],
+                             foreground=theme["fg"],
+                             indicatorcolor=theme["surface"],
+                             bordercolor=theme["border"],
+                             padding=5)
+
         self.style.map("TCheckbutton",
-                      indicatorcolor=[("selected", theme["accent"]),
-                                    ("active", theme["hover"])],
-                      background=[("active", theme["bg"])])
-        
+                       indicatorcolor=[("selected", theme["accent"]),
+                                       ("active", theme["hover"])],
+                       background=[("active", theme["bg"])])
+
         # Card Checkbutton
         self.style.configure("Card.TCheckbutton",
-                           background=theme["surface"],
-                           foreground=theme["fg"])
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"])
+
         self.style.map("Card.TCheckbutton",
-                      background=[("active", theme["surface"])])
-        
+                       background=[("active", theme["surface"])])
+
         # TRadiobutton
         self.style.configure("TRadiobutton",
-                           background=theme["bg"],
-                           foreground=theme["fg"],
-                           indicatorcolor=theme["surface"],
-                           padding=5)
-        
+                             background=theme["bg"],
+                             foreground=theme["fg"],
+                             indicatorcolor=theme["surface"],
+                             padding=5)
+
         self.style.map("TRadiobutton",
-                      indicatorcolor=[("selected", theme["accent"]),
-                                    ("active", theme["hover"])],
-                      background=[("active", theme["bg"])])
-        
+                       indicatorcolor=[("selected", theme["accent"]),
+                                       ("active", theme["hover"])],
+                       background=[("active", theme["bg"])])
+
         # Card Radiobutton
         self.style.configure("Card.TRadiobutton",
-                           background=theme["surface"],
-                           foreground=theme["fg"])
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"])
+
         # TCombobox - Dropdown styling
         self.style.configure("TCombobox",
-                           fieldbackground=theme["surface"],
-                           background=theme["surface"],
-                           foreground=theme["fg"],
-                           bordercolor=theme["border"],
-                           arrowcolor=theme["fg"],
-                           padding=10,
-                           relief="flat")
-        
+                             fieldbackground=theme["surface"],
+                             background=theme["surface"],
+                             foreground=theme["fg"],
+                             bordercolor=theme["border"],
+                             arrowcolor=theme["fg"],
+                             padding=10,
+                             relief="flat")
+
         self.style.map("TCombobox",
-                      fieldbackground=[("focus", theme["surface"]),
-                                     ("readonly", theme["surface"])],
-                      bordercolor=[("focus", theme["accent"])],
-                      arrowcolor=[("active", theme["accent"])])
-        
+                       fieldbackground=[("focus", theme["surface"]),
+                                        ("readonly", theme["surface"])],
+                       bordercolor=[("focus", theme["accent"])],
+                       arrowcolor=[("active", theme["accent"])])
+
         # TProgressbar - Modern progress bar
         self.style.configure("TProgressbar",
-                           background=theme["accent"],
-                           troughcolor=theme["surface"],
-                           bordercolor=theme["border"],
-                           lightcolor=theme["accent"],
-                           darkcolor=theme["accent"],
-                           thickness=10)
-        
+                             background=theme["accent"],
+                             troughcolor=theme["surface"],
+                             bordercolor=theme["border"],
+                             lightcolor=theme["accent"],
+                             darkcolor=theme["accent"],
+                             thickness=10)
+
         # Success/Warning/Error progressbars
         self.style.configure("Success.TProgressbar",
-                           background=theme["success"],
-                           troughcolor=theme["surface"])
-        
+                             background=theme["success"],
+                             troughcolor=theme["surface"])
+
         self.style.configure("Warning.TProgressbar",
-                           background=theme["warning"],
-                           troughcolor=theme["surface"])
-        
+                             background=theme["warning"],
+                             troughcolor=theme["surface"])
+
         self.style.configure("Error.TProgressbar",
-                           background=theme["error"],
-                           troughcolor=theme["surface"])
-        
+                             background=theme["error"],
+                             troughcolor=theme["surface"])
+
         # TScale - Slider styling
         self.style.configure("TScale",
-                           background=theme["bg"],
-                           troughcolor=theme["surface"],
-                           bordercolor=theme["border"],
-                           sliderthickness=20,
-                           sliderrelief="flat")
-        
+                             background=theme["bg"],
+                             troughcolor=theme["surface"],
+                             bordercolor=theme["border"],
+                             sliderthickness=20,
+                             sliderrelief="flat")
+
         self.style.map("TScale",
-                      background=[("active", theme["accent"])])
-        
+                       background=[("active", theme["accent"])])
+
         # TScrollbar - Modern scrollbar
         self.style.configure("TScrollbar",
-                           background=theme["surface_variant"],
-                           troughcolor=theme["bg"],
-                           bordercolor=theme["border"],
-                           arrowcolor=theme["fg"],
-                           relief="flat")
-        
+                             background=theme["surface_variant"],
+                             troughcolor=theme["bg"],
+                             bordercolor=theme["border"],
+                             arrowcolor=theme["fg"],
+                             relief="flat")
+
         self.style.map("TScrollbar",
-                      background=[("active", theme["accent"]),
-                                ("pressed", theme["accent"])])
-        
+                       background=[("active", theme["accent"]),
+                                   ("pressed", theme["accent"])])
+
         # Notebook (Tabs) - Modern tab styling
         self.style.configure("TNotebook",
-                           background=theme["bg"],
-                           bordercolor=theme["border"],
-                           tabmargins=[2, 5, 2, 0],
-                           borderwidth=0)
-        
+                             background=theme["bg"],
+                             bordercolor=theme["border"],
+                             tabmargins=[2, 5, 2, 0],
+                             borderwidth=0)
+
         self.style.configure("TNotebook.Tab",
-                           background=theme["surface"],
-                           foreground=theme["fg"],
-                           padding=[20, 10],
-                           bordercolor=theme["border"],
-                           focuscolor=theme["accent"])
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"],
+                             padding=[20, 10],
+                             bordercolor=theme["border"],
+                             focuscolor=theme["accent"])
+
         self.style.map("TNotebook.Tab",
-                      background=[("selected", theme["accent"]),
-                                ("active", theme["hover"])],
-                      foreground=[("selected", "#ffffff"),
-                                ("active", theme["fg"])],
-                      expand=[("selected", [1, 1, 1, 0])])
-        
+                       background=[("selected", theme["accent"]),
+                                   ("active", theme["hover"])],
+                       foreground=[("selected", "#ffffff"),
+                                   ("active", theme["fg"])],
+                       expand=[("selected", [1, 1, 1, 0])])
+
         # TSeparator - Divider lines
         self.style.configure("TSeparator",
-                           background=theme["border"])
-        
+                             background=theme["border"])
+
         # Treeview - List/Table view
         self.style.configure("Treeview",
-                           background=theme["surface"],
-                           foreground=theme["fg"],
-                           fieldbackground=theme["surface"],
-                           borderwidth=0,
-                           relief="flat")
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"],
+                             fieldbackground=theme["surface"],
+                             borderwidth=0,
+                             relief="flat")
+
         self.style.configure("Treeview.Heading",
-                           background=theme["surface_variant"],
-                           foreground=theme["fg"],
-                           borderwidth=1,
-                           relief="flat")
-        
+                             background=theme["surface_variant"],
+                             foreground=theme["fg"],
+                             borderwidth=1,
+                             relief="flat")
+
         self.style.map("Treeview",
-                      background=[("selected", theme["accent"])],
-                      foreground=[("selected", "#ffffff")])
-        
+                       background=[("selected", theme["accent"])],
+                       foreground=[("selected", "#ffffff")])
+
         self.style.map("Treeview.Heading",
-                      background=[("active", theme["hover"])])
-        
+                       background=[("active", theme["hover"])])
+
         # Menubutton
         self.style.configure("TMenubutton",
-                           background=theme["surface"],
-                           foreground=theme["fg"],
-                           borderwidth=1,
-                           bordercolor=theme["border"],
-                           padding=(10, 5),
-                           relief="flat")
-        
+                             background=theme["surface"],
+                             foreground=theme["fg"],
+                             borderwidth=1,
+                             bordercolor=theme["border"],
+                             padding=(10, 5),
+                             relief="flat")
+
         self.style.map("TMenubutton",
-                      background=[("active", theme["hover"])],
-                      bordercolor=[("active", theme["accent"])])
-        
+                       background=[("active", theme["hover"])],
+                       bordercolor=[("active", theme["accent"])])
+
         # Labelframe
         self.style.configure("TLabelframe",
-                           background=theme["bg"],
-                           foreground=theme["fg"],
-                           bordercolor=theme["border"],
-                           borderwidth=1,
-                           relief="flat")
-        
+                             background=theme["bg"],
+                             foreground=theme["fg"],
+                             bordercolor=theme["border"],
+                             borderwidth=1,
+                             relief="flat")
+
         self.style.configure("TLabelframe.Label",
-                           background=theme["bg"],
-                           foreground=theme["accent"],
-                           font=theme["font"])
-        
+                             background=theme["bg"],
+                             foreground=theme["accent"],
+                             font=theme["font"])
+
         # Spinbox
         self.style.configure("TSpinbox",
-                           fieldbackground=theme["surface"],
-                           foreground=theme["fg"],
-                           bordercolor=theme["border"],
-                           arrowcolor=theme["fg"],
-                           padding=10,
-                           relief="flat")
-        
+                             fieldbackground=theme["surface"],
+                             foreground=theme["fg"],
+                             bordercolor=theme["border"],
+                             arrowcolor=theme["fg"],
+                             padding=10,
+                             relief="flat")
+
         self.style.map("TSpinbox",
-                      fieldbackground=[("focus", theme["surface"])],
-                      bordercolor=[("focus", theme["accent"])],
-                      arrowcolor=[("active", theme["accent"])])
-        
+                       fieldbackground=[("focus", theme["surface"])],
+                       bordercolor=[("focus", theme["accent"])],
+                       arrowcolor=[("active", theme["accent"])])
+
     def get_theme_list(self):
         """Return list of available theme names"""
         return list(THEMES.keys())
-    
+
     def get_current_theme(self):
         """Return current theme name"""
         return self.current_theme
-    
+
     def get_theme_colors(self, theme_name=None):
         """
         Get color dictionary for a theme
-        
+
         Args:
             theme_name: Name of theme (uses current theme if None)
-            
+
         Returns:
             Dictionary of theme colors
         """
         if theme_name is None:
             return self._theme_data
         return THEMES.get(theme_name)
-    
+
     def create_card(self, parent, **kwargs):
         """
         Create a styled card frame
-        
+
         Args:
             parent: Parent widget
             **kwargs: Additional arguments passed to ttk.Frame
-            
+
         Returns:
             ttk.Frame with Card style
         """
         card = ttk.Frame(parent, style="Card.TFrame", **kwargs)
         return card
-    
+
     def create_sidebar(self, parent, width=250, **kwargs):
         """
         Create a styled sidebar frame
-        
+
         Args:
             parent: Parent widget
             width: Width of sidebar
             **kwargs: Additional arguments
-            
+
         Returns:
             ttk.Frame with Sidebar style
         """
-        sidebar = ttk.Frame(parent, style="Sidebar.TFrame", width=width, **kwargs)
+        sidebar = ttk.Frame(parent, style="Sidebar.TFrame",
+                            width=width, **kwargs)
         return sidebar
-    
+
     def create_toolbar(self, parent, **kwargs):
         """
         Create a styled toolbar frame
-        
+
         Args:
             parent: Parent widget
             **kwargs: Additional arguments
-            
+
         Returns:
             ttk.Frame with Toolbar style
         """
@@ -750,11 +753,11 @@ class ThemedTk:
 def create_card(parent, **kwargs):
     """
     Utility function to create a styled card frame
-    
+
     Args:
         parent: Parent widget
         **kwargs: Additional arguments passed to ttk.Frame
-        
+
     Returns:
         ttk.Frame with Card style
     """
@@ -764,12 +767,12 @@ def create_card(parent, **kwargs):
 def create_sidebar(parent, width=250, **kwargs):
     """
     Utility function to create a styled sidebar
-    
+
     Args:
         parent: Parent widget
         width: Sidebar width
         **kwargs: Additional arguments
-        
+
     Returns:
         ttk.Frame with Sidebar style
     """
@@ -779,23 +782,23 @@ def create_sidebar(parent, width=250, **kwargs):
 def create_demo(root=None):
     """
     Launch an advanced demo application showcasing all themes
-    
+
     Args:
         root: Optional Tkinter root window. If None, a new window will be created.
-        
+
     Returns:
         The root window containing the demo
     """
     import tkinter as tk
     from tkinter import ttk
-    
+
     # Create window if not provided
     create_window = root is None
     if create_window:
         root = tk.Tk()
         root.title("TkModernThemes Demo")
         root.geometry("1000x700")
-        
+
         # Center the window
         window_width = 1000
         window_height = 700
@@ -804,61 +807,62 @@ def create_demo(root=None):
         x = (screen_width // 2) - (window_width // 2)
         y = (screen_height // 2) - (window_height // 2)
         root.geometry(f"{window_width}x{window_height}+{x}+{y}")
-    
+
     # Apply theme to root window
     theme = ThemedTk(root)
     theme.set_theme("nexus_dark")
-    
+
     # Main container with scrollable content
     main_container = ttk.Frame(root)
     main_container.pack(fill=tk.BOTH, expand=True)
-    
+
     # Create a canvas and scrollbar for the main content
     canvas = tk.Canvas(main_container)
-    scrollbar = ttk.Scrollbar(main_container, orient="vertical", command=canvas.yview)
+    scrollbar = ttk.Scrollbar(
+        main_container, orient="vertical", command=canvas.yview)
     scrollable_frame = ttk.Frame(canvas)
-    
+
     # Configure the canvas scrolling
     scrollable_frame.bind(
         "<Configure>",
         lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
     )
-    
+
     # Create a window in the canvas to contain the scrollable frame
     canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
     canvas.configure(yscrollcommand=scrollbar.set)
-    
+
     # Pack the canvas and scrollbar
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
-    
+
     # Bind mousewheel for scrolling
     def _on_mousewheel(event):
         canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-    
+
     canvas.bind_all("<MouseWheel>", _on_mousewheel)
-    
+
     # Create demo components
     def create_demo_components():
         # Create a card for theme selection
         theme_card = theme.create_card(scrollable_frame, padding=20)
         theme_card.pack(fill=tk.X, padx=20, pady=20)
-        
+
         # Theme selection header
         ttk.Label(theme_card, text="Select Theme", style="Heading.TLabel",
-                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
+                  font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
+
         # Theme selection frame
         theme_frame = ttk.Frame(theme_card)
         theme_frame.pack(fill=tk.X)
-        
+
         # Create radio buttons for theme selection
         theme_var = tk.StringVar(value=theme.get_current_theme())
-        
+
         # Create a frame for the theme buttons with a grid layout
         theme_grid = ttk.Frame(theme_frame)
         theme_grid.pack(fill=tk.X, pady=10)
-        
+
         # Add theme selection buttons in a grid
         for i, theme_name in enumerate(theme.get_theme_list()):
             btn = ttk.Radiobutton(
@@ -868,74 +872,85 @@ def create_demo(root=None):
                 value=theme_name,
                 command=lambda n=theme_name: theme.set_theme(n)
             )
-            btn.grid(row=i//3, column=i%3, padx=10, pady=5, sticky=tk.W)
-        
+            btn.grid(row=i//3, column=i % 3, padx=10, pady=5, sticky=tk.W)
+
         # Add some sample widgets in a card
         widget_card = theme.create_card(scrollable_frame, padding=20)
         widget_card.pack(fill=tk.X, padx=20, pady=(0, 20))
-        
+
         # Widget demo header
         ttk.Label(widget_card, text="Widget Showcase", style="Heading.TLabel",
-                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
+                  font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
+
         # Create a frame for the widget grid
         widget_frame = ttk.Frame(widget_card)
         widget_frame.pack(fill=tk.X)
-        
+
         # Add some basic widgets
         # Entry field
-        ttk.Label(widget_frame, text="Text Entry:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        ttk.Label(widget_frame, text="Text Entry:").grid(
+            row=0, column=0, sticky=tk.W, pady=5)
         entry = ttk.Entry(widget_frame)
         entry.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
-        
+
         # Buttons
-        ttk.Button(widget_frame, text="Primary Button").grid(row=1, column=0, padx=5, pady=5)
-        ttk.Button(widget_frame, text="Secondary Button", style="Secondary.TButton").grid(row=1, column=1, padx=5, pady=5)
-        
+        ttk.Button(widget_frame, text="Primary Button").grid(
+            row=1, column=0, padx=5, pady=5)
+        ttk.Button(widget_frame, text="Secondary Button", style="Secondary.TButton").grid(
+            row=1, column=1, padx=5, pady=5)
+
         # Checkbuttons
         check_var1 = tk.BooleanVar()
         check_var2 = tk.BooleanVar(value=True)
-        ttk.Checkbutton(widget_frame, text="Check me", variable=check_var1).grid(row=2, column=0, sticky=tk.W, pady=5)
-        ttk.Checkbutton(widget_frame, text="Checked by default", variable=check_var2).grid(row=2, column=1, sticky=tk.W, pady=5)
-        
+        ttk.Checkbutton(widget_frame, text="Check me", variable=check_var1).grid(
+            row=2, column=0, sticky=tk.W, pady=5)
+        ttk.Checkbutton(widget_frame, text="Checked by default", variable=check_var2).grid(
+            row=2, column=1, sticky=tk.W, pady=5)
+
         # Radio buttons
         radio_var = tk.StringVar(value="option1")
-        ttk.Label(widget_frame, text="Options:").grid(row=3, column=0, sticky=tk.W, pady=5)
-        ttk.Radiobutton(widget_frame, text="Option 1", variable=radio_var, value="option1").grid(row=4, column=0, sticky=tk.W)
-        ttk.Radiobutton(widget_frame, text="Option 2", variable=radio_var, value="option2").grid(row=5, column=0, sticky=tk.W)
-        
+        ttk.Label(widget_frame, text="Options:").grid(
+            row=3, column=0, sticky=tk.W, pady=5)
+        ttk.Radiobutton(widget_frame, text="Option 1", variable=radio_var,
+                        value="option1").grid(row=4, column=0, sticky=tk.W)
+        ttk.Radiobutton(widget_frame, text="Option 2", variable=radio_var,
+                        value="option2").grid(row=5, column=0, sticky=tk.W)
+
         # Scale
-        ttk.Label(widget_frame, text="Volume:").grid(row=3, column=1, sticky=tk.W, pady=5)
+        ttk.Label(widget_frame, text="Volume:").grid(
+            row=3, column=1, sticky=tk.W, pady=5)
         scale = ttk.Scale(widget_frame, from_=0, to=100, orient=tk.HORIZONTAL)
         scale.set(50)
         scale.grid(row=4, column=1, sticky=tk.EW, padx=5)
-        
+
         # Progress bar
-        ttk.Label(widget_frame, text="Progress:").grid(row=5, column=1, sticky=tk.W, pady=5)
+        ttk.Label(widget_frame, text="Progress:").grid(
+            row=5, column=1, sticky=tk.W, pady=5)
         progress = ttk.Progressbar(widget_frame, mode='determinate', value=65)
         progress.grid(row=6, column=1, sticky=tk.EW, padx=5, pady=5)
-        
+
         # Configure grid weights
         widget_frame.columnconfigure(1, weight=1)
-        
+
         # Add a separator
-        ttk.Separator(scrollable_frame, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=20, pady=10)
-        
+        ttk.Separator(scrollable_frame, orient=tk.HORIZONTAL).pack(
+            fill=tk.X, padx=20, pady=10)
+
         # Add a sample table (Treeview)
         table_card = theme.create_card(scrollable_frame, padding=20)
         table_card.pack(fill=tk.X, padx=20, pady=(0, 20))
-        
+
         ttk.Label(table_card, text="Data Table", style="Heading.TLabel",
-                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
+                  font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
+
         # Create a frame for the treeview and scrollbar
         tree_frame = ttk.Frame(table_card)
         tree_frame.pack(fill=tk.BOTH, expand=True)
-        
+
         # Add a scrollbar to the treeview
         tree_scroll = ttk.Scrollbar(tree_frame)
         tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        
+
         # Create the treeview
         tree = ttk.Treeview(
             tree_frame,
@@ -944,20 +959,20 @@ def create_demo(root=None):
             yscrollcommand=tree_scroll.set,
             height=5
         )
-        
+
         # Configure the scrollbar
         tree_scroll.config(command=tree.yview)
-        
+
         # Define columns
         tree.heading("Name", text="Name")
         tree.heading("Status", text="Status")
         tree.heading("Progress", text="Progress")
-        
+
         # Set column widths
         tree.column("Name", width=200)
         tree.column("Status", width=150)
         tree.column("Progress", width=100)
-        
+
         # Add sample data
         sample_data = [
             ("Project Alpha", "Active", "85%"),
@@ -965,37 +980,38 @@ def create_demo(root=None):
             ("Project Gamma", "Complete", "100%"),
             ("Project Delta", "Active", "62%"),
         ]
-        
+
         for item in sample_data:
             tree.insert("", tk.END, values=item)
-        
+
         # Pack the treeview
         tree.pack(fill=tk.BOTH, expand=True)
-        
+
         # Add a tabbed interface example
         tab_card = theme.create_card(scrollable_frame, padding=20)
         tab_card.pack(fill=tk.X, padx=20, pady=(0, 20))
-        
+
         ttk.Label(tab_card, text="Tabbed Interface", style="Heading.TLabel",
-                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
+                  font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
+
         # Create a notebook (tabbed interface)
         notebook = ttk.Notebook(tab_card)
         notebook.pack(fill=tk.BOTH, expand=True)
-        
+
         # Create and add tabs
         for i in range(3):
             tab = ttk.Frame(notebook, padding=10)
             notebook.add(tab, text=f"Tab {i+1}")
-            ttk.Label(tab, text=f"This is the content of Tab {i+1}").pack(pady=20)
-    
+            ttk.Label(
+                tab, text=f"This is the content of Tab {i+1}").pack(pady=20)
+
     # Create all demo components
     create_demo_components()
-    
+
     # Start the main loop if we created the window
     if create_window:
         root.mainloop()
-    
+
     return root
 
 
