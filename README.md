@@ -44,7 +44,7 @@ pip install TkModernThemes
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/TkModernThemes.git
+git clone https://github.com/Dream-Pixels-Forge/TkModernThemes.git
 cd TkModernThemes
 
 # Install in development mode
