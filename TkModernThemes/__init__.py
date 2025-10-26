@@ -776,269 +776,189 @@ def create_sidebar(parent, width=250, **kwargs):
     return ttk.Frame(parent, style="Sidebar.TFrame", width=width, **kwargs)
 
 
-def create_demo():
-    """Launch an advanced demo application showcasing all themes"""
-    root = tk.Tk()
-    root.title("TkModernThemes - PySide6 & Nexus Inspired")
-    root.geometry("1200x800")
+def create_demo(root=None):
+    """
+    Launch an advanced demo application showcasing all themes
     
-    # Initialize theme manager
+    Args:
+        root: Optional Tkinter root window. If None, a new window will be created.
+        
+    Returns:
+        The root window containing the demo
+    """
+    import tkinter as tk
+    from tkinter import ttk
+    
+    # Create window if not provided
+    create_window = root is None
+    if create_window:
+        root = tk.Tk()
+        root.title("TkModernThemes Demo")
+        root.geometry("1000x700")
+        
+        # Center the window
+        window_width = 1000
+        window_height = 700
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        x = (screen_width // 2) - (window_width // 2)
+        y = (screen_height // 2) - (window_height // 2)
+        root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+    
+    # Apply theme to root window
     theme = ThemedTk(root)
     theme.set_theme("nexus_dark")
     
-    # Create main layout with sidebar
-    sidebar = theme.create_sidebar(root, width=250)
-    sidebar.pack(side=tk.LEFT, fill=tk.Y)
-    
-    # Main content area
+    # Main container with scrollable content
     main_container = ttk.Frame(root)
-    main_container.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    main_container.pack(fill=tk.BOTH, expand=True)
     
-    # Toolbar
-    toolbar = theme.create_toolbar(main_container)
-    toolbar.pack(fill=tk.X, padx=20, pady=(20, 0))
+    # Create a canvas and scrollbar for the main content
+    canvas = tk.Canvas(main_container)
+    scrollbar = ttk.Scrollbar(main_container, orient="vertical", command=canvas.yview)
+    scrollable_frame = ttk.Frame(canvas)
     
-    # Main content
-    main_frame = ttk.Frame(main_container, padding=20)
-    main_frame.pack(fill=tk.BOTH, expand=True)
+    # Configure the canvas scrolling
+    scrollable_frame.bind(
+        "<Configure>",
+        lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+    )
     
-    # Sidebar content
-    ttk.Label(sidebar, text="🎨 TkModernThemes", 
-             style="Heading.TLabel").pack(pady=20, padx=15)
+    # Create a window in the canvas to contain the scrollable frame
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
     
-    ttk.Label(sidebar, text="Select Theme:", 
-             style="Sidebar.TLabel").pack(anchor=tk.W, padx=15, pady=(10, 5))
+    # Pack the canvas and scrollbar
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
     
-    theme_var = tk.StringVar(value="nexus_dark")
-    theme_listbox_frame = ttk.Frame(sidebar)
-    theme_listbox_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=(0, 15))
+    # Bind mousewheel for scrolling
+    def _on_mousewheel(event):
+        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
     
-    def change_theme(event=None):
-        selected = theme_listbox.curselection()
-        if selected:
-            theme_name = theme.get_theme_list()[selected[0]]
-            theme.set_theme(theme_name)
-            create_demo_components()
+    canvas.bind_all("<MouseWheel>", _on_mousewheel)
     
-    # Listbox for themes
-    theme_listbox = tk.Listbox(theme_listbox_frame,
-                               bg=theme._theme_data["surface_variant"],
-                               fg=theme._theme_data["fg"],
-                               selectbackground=theme._theme_data["accent"],
-                               selectforeground="#ffffff",
-                               borderwidth=0,
-                               highlightthickness=0,
-                               font=theme._theme_data["font"])
-    theme_listbox.pack(fill=tk.BOTH, expand=True)
-    
-    for t in theme.get_theme_list():
-        theme_listbox.insert(tk.END, t.replace('_', ' ').title())
-    
-    theme_listbox.bind("<<ListboxSelect>>", change_theme)
-    theme_listbox.selection_set(0)
-    
-    # Toolbar content
-    ttk.Label(toolbar, text="Component Showcase").pack(side=tk.LEFT, padx=5)
-    ttk.Button(toolbar, text="Refresh", style="Secondary.TButton",
-              command=create_demo_components).pack(side=tk.RIGHT, padx=5)
-    
-    # Demo components container
-    demo_container = ttk.Frame(main_frame)
-    demo_container.pack(fill=tk.BOTH, expand=True)
-    
+    # Create demo components
     def create_demo_components():
-        # Clear existing components
-        for widget in demo_container.winfo_children():
-            widget.destroy()
+        # Create a card for theme selection
+        theme_card = theme.create_card(scrollable_frame, padding=20)
+        theme_card.pack(fill=tk.X, padx=20, pady=20)
         
-        # Create scrollable canvas
-        canvas = tk.Canvas(demo_container, bg=theme._theme_data["bg"],
-                          highlightthickness=0)
-        scrollbar = ttk.Scrollbar(demo_container, orient="vertical",
-                                 command=canvas.yview)
-        scrollable_frame = ttk.Frame(canvas)
+        # Theme selection header
+        ttk.Label(theme_card, text="Select Theme", style="Heading.TLabel",
+                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
         
-        scrollable_frame.bind(
-            "<Configure>",
-            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-        )
+        # Theme selection frame
+        theme_frame = ttk.Frame(theme_card)
+        theme_frame.pack(fill=tk.X)
         
-        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-        canvas.configure(yscrollcommand=scrollbar.set)
+        # Create radio buttons for theme selection
+        theme_var = tk.StringVar(value=theme.get_current_theme())
         
-        # Card 1: Buttons
-        card1 = theme.create_card(scrollable_frame, padding=20)
-        card1.pack(fill=tk.X, pady=(0, 15))
+        # Create a frame for the theme buttons with a grid layout
+        theme_grid = ttk.Frame(theme_frame)
+        theme_grid.pack(fill=tk.X, pady=10)
         
-        ttk.Label(card1, text="Buttons", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
+        # Add theme selection buttons in a grid
+        for i, theme_name in enumerate(theme.get_theme_list()):
+            btn = ttk.Radiobutton(
+                theme_grid,
+                text=theme_name.replace('_', ' ').title(),
+                variable=theme_var,
+                value=theme_name,
+                command=lambda n=theme_name: theme.set_theme(n)
+            )
+            btn.grid(row=i//3, column=i%3, padx=10, pady=5, sticky=tk.W)
         
-        btn_frame = ttk.Frame(card1)
-        btn_frame.pack(fill=tk.X)
+        # Add some sample widgets in a card
+        widget_card = theme.create_card(scrollable_frame, padding=20)
+        widget_card.pack(fill=tk.X, padx=20, pady=(0, 20))
         
-        ttk.Button(btn_frame, text="Primary").grid(row=0, column=0, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Secondary",
-                  style="Secondary.TButton").grid(row=0, column=1, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Accent",
-                  style="Accent.TButton").grid(row=0, column=2, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Success",
-                  style="Success.TButton").grid(row=1, column=0, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Warning",
-                  style="Warning.TButton").grid(row=1, column=1, padx=5, pady=5)
-        ttk.Button(btn_frame, text="Error",
-                  style="Error.TButton").grid(row=1, column=2, padx=5, pady=5)
+        # Widget demo header
+        ttk.Label(widget_card, text="Widget Showcase", style="Heading.TLabel",
+                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
         
-        # Card 2: Input Fields
-        card2 = theme.create_card(scrollable_frame, padding=20)
-        card2.pack(fill=tk.X, pady=(0, 15))
+        # Create a frame for the widget grid
+        widget_frame = ttk.Frame(widget_card)
+        widget_frame.pack(fill=tk.X)
         
-        ttk.Label(card2, text="Input Fields", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
+        # Add some basic widgets
+        # Entry field
+        ttk.Label(widget_frame, text="Text Entry:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        entry = ttk.Entry(widget_frame)
+        entry.grid(row=0, column=1, padx=5, pady=5, sticky=tk.EW)
         
-        input_frame = ttk.Frame(card2)
-        input_frame.pack(fill=tk.X)
+        # Buttons
+        ttk.Button(widget_frame, text="Primary Button").grid(row=1, column=0, padx=5, pady=5)
+        ttk.Button(widget_frame, text="Secondary Button", style="Secondary.TButton").grid(row=1, column=1, padx=5, pady=5)
         
-        ttk.Label(input_frame, text="Username:", style="Card.TLabel").grid(
-            row=0, column=0, sticky=tk.W, pady=8, padx=(0, 10))
-        ttk.Entry(input_frame, width=35).grid(
-            row=0, column=1, sticky=tk.EW, pady=8)
+        # Checkbuttons
+        check_var1 = tk.BooleanVar()
+        check_var2 = tk.BooleanVar(value=True)
+        ttk.Checkbutton(widget_frame, text="Check me", variable=check_var1).grid(row=2, column=0, sticky=tk.W, pady=5)
+        ttk.Checkbutton(widget_frame, text="Checked by default", variable=check_var2).grid(row=2, column=1, sticky=tk.W, pady=5)
         
-        ttk.Label(input_frame, text="Password:", style="Card.TLabel").grid(
-            row=1, column=0, sticky=tk.W, pady=8, padx=(0, 10))
-        ttk.Entry(input_frame, width=35, show="●").grid(
-            row=1, column=1, sticky=tk.EW, pady=8)
-        
-        ttk.Label(input_frame, text="Country:", style="Card.TLabel").grid(
-            row=2, column=0, sticky=tk.W, pady=8, padx=(0, 10))
-        ttk.Combobox(input_frame, values=["USA", "UK", "Canada"], 
-                    state="readonly", width=33).grid(
-            row=2, column=1, sticky=tk.EW, pady=8)
-        
-        input_frame.columnconfigure(1, weight=1)
-        
-        # Card 3: Selections
-        card3 = theme.create_card(scrollable_frame, padding=20)
-        card3.pack(fill=tk.X, pady=(0, 15))
-        
-        ttk.Label(card3, text="Selection Controls", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
-        check_frame = ttk.Frame(card3)
-        check_frame.pack(fill=tk.X)
-        
-        ttk.Checkbutton(check_frame, text="Enable notifications",
-                       style="Card.TCheckbutton").pack(anchor=tk.W, pady=5)
-        ttk.Checkbutton(check_frame, text="Auto-save changes",
-                       style="Card.TCheckbutton").pack(anchor=tk.W, pady=5)
-        ttk.Checkbutton(check_frame, text="Dark mode",
-                       style="Card.TCheckbutton").pack(anchor=tk.W, pady=5)
-        
-        ttk.Separator(check_frame, orient=tk.HORIZONTAL).pack(
-            fill=tk.X, pady=15)
-        
+        # Radio buttons
         radio_var = tk.StringVar(value="option1")
-        ttk.Radiobutton(check_frame, text="Option A", variable=radio_var,
-                       value="option1", style="Card.TRadiobutton").pack(
-            anchor=tk.W, pady=5)
-        ttk.Radiobutton(check_frame, text="Option B", variable=radio_var,
-                       value="option2", style="Card.TRadiobutton").pack(
-            anchor=tk.W, pady=5)
+        ttk.Label(widget_frame, text="Options:").grid(row=3, column=0, sticky=tk.W, pady=5)
+        ttk.Radiobutton(widget_frame, text="Option 1", variable=radio_var, value="option1").grid(row=4, column=0, sticky=tk.W)
+        ttk.Radiobutton(widget_frame, text="Option 2", variable=radio_var, value="option2").grid(row=5, column=0, sticky=tk.W)
         
-        # Card 4: Progress & Status
-        card4 = theme.create_card(scrollable_frame, padding=20)
-        card4.pack(fill=tk.X, pady=(0, 15))
+        # Scale
+        ttk.Label(widget_frame, text="Volume:").grid(row=3, column=1, sticky=tk.W, pady=5)
+        scale = ttk.Scale(widget_frame, from_=0, to=100, orient=tk.HORIZONTAL)
+        scale.set(50)
+        scale.grid(row=4, column=1, sticky=tk.EW, padx=5)
         
-        ttk.Label(card4, text="Progress & Status", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
+        # Progress bar
+        ttk.Label(widget_frame, text="Progress:").grid(row=5, column=1, sticky=tk.W, pady=5)
+        progress = ttk.Progressbar(widget_frame, mode='determinate', value=65)
+        progress.grid(row=6, column=1, sticky=tk.EW, padx=5, pady=5)
         
-        progress_frame = ttk.Frame(card4)
-        progress_frame.pack(fill=tk.X)
+        # Configure grid weights
+        widget_frame.columnconfigure(1, weight=1)
         
-        ttk.Label(progress_frame, text="Default Progress:",
-                 style="Card.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Progressbar(progress_frame, length=500, mode='determinate',
-                       value=65).pack(fill=tk.X, pady=(0, 15))
+        # Add a separator
+        ttk.Separator(scrollable_frame, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=20, pady=10)
         
-        ttk.Label(progress_frame, text="Success:",
-                 style="Success.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Progressbar(progress_frame, length=500, mode='determinate',
-                       value=85, style="Success.TProgressbar").pack(
-            fill=tk.X, pady=(0, 15))
+        # Add a sample table (Treeview)
+        table_card = theme.create_card(scrollable_frame, padding=20)
+        table_card.pack(fill=tk.X, padx=20, pady=(0, 20))
         
-        ttk.Label(progress_frame, text="Warning:",
-                 style="Warning.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Progressbar(progress_frame, length=500, mode='determinate',
-                       value=45, style="Warning.TProgressbar").pack(
-            fill=tk.X, pady=(0, 15))
+        ttk.Label(table_card, text="Data Table", style="Heading.TLabel",
+                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
         
-        ttk.Label(progress_frame, text="Error:",
-                 style="Error.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Progressbar(progress_frame, length=500, mode='determinate',
-                       value=25, style="Error.TProgressbar").pack(
-            fill=tk.X, pady=(0, 15))
-        
-        # Card 5: Scale & Sliders
-        card5 = theme.create_card(scrollable_frame, padding=20)
-        card5.pack(fill=tk.X, pady=(0, 15))
-        
-        ttk.Label(card5, text="Sliders & Controls", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
-        scale_frame = ttk.Frame(card5)
-        scale_frame.pack(fill=tk.X)
-        
-        ttk.Label(scale_frame, text="Volume:", style="Card.TLabel").pack(
-            anchor=tk.W, pady=5)
-        ttk.Scale(scale_frame, from_=0, to=100, orient=tk.HORIZONTAL,
-                 length=500).pack(fill=tk.X, pady=(0, 15))
-        
-        ttk.Label(scale_frame, text="Brightness:", style="Card.TLabel").pack(
-            anchor=tk.W, pady=5)
-        ttk.Scale(scale_frame, from_=0, to=100, orient=tk.HORIZONTAL,
-                 length=500).pack(fill=tk.X, pady=(0, 15))
-        
-        # Card 6: Notebook (Tabs)
-        card6 = theme.create_card(scrollable_frame, padding=20)
-        card6.pack(fill=tk.X, pady=(0, 15))
-        
-        ttk.Label(card6, text="Tabbed Interface", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
-        notebook = ttk.Notebook(card6)
-        notebook.pack(fill=tk.BOTH, expand=True)
-        
-        for i in range(3):
-            tab = ttk.Frame(notebook, padding=20)
-            notebook.add(tab, text=f"Tab {i+1}")
-            ttk.Label(tab, text=f"Content for Tab {i+1}",
-                     style="Card.TLabel").pack(pady=20)
-        
-        # Card 7: Treeview
-        card7 = theme.create_card(scrollable_frame, padding=20)
-        card7.pack(fill=tk.X, pady=(0, 15))
-        
-        ttk.Label(card7, text="Data Table", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
-        
-        tree_frame = ttk.Frame(card7)
+        # Create a frame for the treeview and scrollbar
+        tree_frame = ttk.Frame(table_card)
         tree_frame.pack(fill=tk.BOTH, expand=True)
         
+        # Add a scrollbar to the treeview
         tree_scroll = ttk.Scrollbar(tree_frame)
         tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
         
-        tree = ttk.Treeview(tree_frame, columns=("Name", "Status", "Progress"),
-                           show="headings", height=5,
-                           yscrollcommand=tree_scroll.set)
+        # Create the treeview
+        tree = ttk.Treeview(
+            tree_frame,
+            columns=("Name", "Status", "Progress"),
+            show="headings",
+            yscrollcommand=tree_scroll.set,
+            height=5
+        )
+        
+        # Configure the scrollbar
         tree_scroll.config(command=tree.yview)
         
+        # Define columns
         tree.heading("Name", text="Name")
         tree.heading("Status", text="Status")
         tree.heading("Progress", text="Progress")
         
+        # Set column widths
         tree.column("Name", width=200)
         tree.column("Status", width=150)
         tree.column("Progress", width=100)
         
+        # Add sample data
         sample_data = [
             ("Project Alpha", "Active", "85%"),
             ("Project Beta", "Pending", "45%"),
@@ -1049,44 +969,36 @@ def create_demo():
         for item in sample_data:
             tree.insert("", tk.END, values=item)
         
+        # Pack the treeview
         tree.pack(fill=tk.BOTH, expand=True)
         
-        # Card 8: Labels & Typography
-        card8 = theme.create_card(scrollable_frame, padding=20)
-        card8.pack(fill=tk.X)
+        # Add a tabbed interface example
+        tab_card = theme.create_card(scrollable_frame, padding=20)
+        tab_card.pack(fill=tk.X, padx=20, pady=(0, 20))
         
-        ttk.Label(card8, text="Typography & Labels", style="Card.TLabel",
-                 font=("", 12, "bold")).pack(anchor=tk.W, pady=(0, 15))
+        ttk.Label(tab_card, text="Tabbed Interface", style="Heading.TLabel",
+                 font=("", 14, "bold")).pack(anchor=tk.W, pady=(0, 15))
         
-        typography_frame = ttk.Frame(card8)
-        typography_frame.pack(fill=tk.X)
+        # Create a notebook (tabbed interface)
+        notebook = ttk.Notebook(tab_card)
+        notebook.pack(fill=tk.BOTH, expand=True)
         
-        ttk.Label(typography_frame, text="Heading Label",
-                 style="Heading.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Label(typography_frame, text="Regular text label",
-                 style="Card.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Label(typography_frame, text="Muted text (secondary)",
-                 style="Muted.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Label(typography_frame, text="✓ Success message",
-                 style="Success.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Label(typography_frame, text="⚠ Warning message",
-                 style="Warning.TLabel").pack(anchor=tk.W, pady=5)
-        ttk.Label(typography_frame, text="✗ Error message",
-                 style="Error.TLabel").pack(anchor=tk.W, pady=5)
-        
-        canvas.pack(side="left", fill="both", expand=True)
-        scrollbar.pack(side="right", fill="y")
-        
-        # Bind mousewheel
-        def _on_mousewheel(event):
-            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        # Create and add tabs
+        for i in range(3):
+            tab = ttk.Frame(notebook, padding=10)
+            notebook.add(tab, text=f"Tab {i+1}")
+            ttk.Label(tab, text=f"This is the content of Tab {i+1}").pack(pady=20)
     
+    # Create all demo components
     create_demo_components()
     
-    root.mainloop()
+    # Start the main loop if we created the window
+    if create_window:
+        root.mainloop()
+    
+    return root
 
 
 # Allow running as standalone demo
 if __name__ == "__main__":
-    create_demo()
+    create_demo(None)
