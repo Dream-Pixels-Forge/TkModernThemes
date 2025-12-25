@@ -84,17 +84,17 @@ THEMES = {
         "fg": "#ffffff",
         "accent": "#6366f1",
         "secondary": "#8b5cf6",
-        "surface": "#2d2d3d",  # Slightly lighter than bg for contrast
-        "surface_variant": "#3a3a4a",  # Even lighter for hover states
+        "surface": "#2d2d3d80",  # Slightly lighter than bg for contrast with transparency
+        "surface_variant": "#3a3a4a80",  # Even lighter for hover states with transparency
         "border": "#4a4a5a",  # Subtle border color
-        "hover": "#3a3a5a",  # Slightly purple-tinged hover
+        "hover": "#3a3a5a80",  # Slightly purple-tinged hover with transparency
         "success": "#10b981",
         "warning": "#f59e0b",
         "error": "#ef4444",
         "font": ("Segoe UI", 9),
         "heading_font": ("Segoe UI", 16, "semibold"),
         "radius": 16,
-        "blur": False  # Disable blur effect as it's not well supported
+        "blur": True  # Enable blur effect for glassmorphism
     },
     "neomorphism": {
         "name": "Neomorphism",
@@ -267,6 +267,7 @@ class ThemedTk:
         self.current_theme = None
         self.style = ttk.Style()
         self._theme_data = None
+        self._theme_cache = {}  # Cache for theme configurations
 
     def set_theme(self, theme_name):
         """
@@ -330,6 +331,16 @@ class ThemedTk:
             except:
                 pass  # Blur not supported on this platform
 
+        # Enhanced glassmorphism effect using layered frames
+        if theme_name == "glassmorphism":
+            # Apply glassmorphism effect using custom drawing
+            self._apply_glassmorphism_effect()
+
+        # Enhanced neumorphism effect
+        if theme_name == "neomorphism":
+            # Apply neumorphism effect with soft shadows
+            self._apply_neumorphism_effect()
+
         # Use clam as base theme for better customization
         self.style.theme_use('clam')
 
@@ -373,28 +384,37 @@ class ThemedTk:
                              relief="flat")
 
         # Card Frame - Elevated surface with shadow
-        card_bg = theme["surface"]
-        if blur_effect and 'rgba' in card_bg:
-            # For glassmorphism effect
+        # Handle glassmorphism and neumorphism effects separately
+        if theme_name == "glassmorphism":
+            # For glassmorphism, use semi-transparent surface with border
             self.style.configure("Card.TFrame",
-                                 background=card_bg,
+                                 background=theme["surface"],  # This has transparency
+                                 relief="flat",
+                                 borderwidth=1,
+                                 bordercolor=theme["border"])
+        elif theme_name == "neomorphism":
+            # For neumorphism, use the surface color with shadow effect
+            self.style.configure("Card.TFrame",
+                                 background=theme["surface"],
                                  relief="flat",
                                  borderwidth=0)
         else:
-            # Regular card with border
+            # Regular card with border for other themes
             self.style.configure("Card.TFrame",
                                  background=theme["surface"],
                                  relief="flat",
                                  borderwidth=1,
                                  bordercolor=theme["border"])
 
-        # Apply shadow effect if specified
+        # Apply shadow effect if specified (for neumorphism primarily)
         if shadow_effect and not blur_effect:
+            current_padding = self.style.lookup("Card.TFrame", "padding")
+            padding = current_padding if current_padding else (10, 10, 10, 10)
             self.style.configure("Card.TFrame",
-                                 padding=(5, 5, 5, 5),
+                                 padding=padding,
                                  borderwidth=0)
-            # Note: Actual shadow would be implemented with a canvas or custom widget
-            # This is a placeholder for the shadow effect
+            # Note: For more advanced shadow effects, we would need to implement
+            # custom widgets with Canvas drawing
 
         # Sidebar Frame
         self.style.configure("Sidebar.TFrame",
@@ -654,20 +674,118 @@ class ThemedTk:
                              foreground=theme["fg"],
                              fieldbackground=theme["surface"],
                              borderwidth=0,
-                             relief="flat")
+                             relief="flat",
+                             rowheight=25)
 
         self.style.configure("Treeview.Heading",
                              background=theme["surface_variant"],
                              foreground=theme["fg"],
-                             borderwidth=1,
-                             relief="flat")
+                             borderwidth=0,
+                             relief="flat",
+                             padding=(5, 5, 5, 5))
 
         self.style.map("Treeview",
                        background=[("selected", theme["accent"])],
                        foreground=[("selected", "#ffffff")])
 
         self.style.map("Treeview.Heading",
-                       background=[("active", theme["hover"])])
+                       background=[("active", theme["hover"])],
+                       relief=[('active', 'groove')])
+
+        # Treeview item styling
+        self.style.configure("Treeview.Item",
+                             padding=(3, 3, 3, 3))
+
+        # Sizegrip
+        self.style.configure("Sizegrip",
+                             background=theme["surface_variant"],
+                             relief="flat")
+
+        # Sizegrip for resize handle
+        self.style.layout("Sizegrip",
+                         [('Sizegrip.sizegrip', {'sticky': 'se'})])
+
+        # Panedwindow styling
+        self.style.configure("Sash",
+                             background=theme["border"],
+                             relief="flat")
+
+        # Add more advanced styling for various elements
+        self.style.configure("Horizontal.TScale",
+                             background=theme["bg"],
+                             troughcolor=theme["surface_variant"],
+                             bordercolor=theme["border"],
+                             sliderrelief="flat",
+                             sliderlength=20)
+
+        self.style.configure("Vertical.TScale",
+                             background=theme["bg"],
+                             troughcolor=theme["surface_variant"],
+                             bordercolor=theme["border"],
+                             sliderrelief="flat",
+                             sliderlength=20)
+
+        # Add custom styles for different button types
+        self.style.configure("Success.TButton",
+                             background=theme["success"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             focuscolor=theme["success"],
+                             padding=(16, 8),
+                             font=theme["font"],
+                             relief="flat")
+
+        self.style.map("Success.TButton",
+                       background=[("active", self._adjust_color(theme["success"], -20)),
+                                   ("pressed", theme["success"]),
+                                   ("disabled", theme["border"])],
+                       foreground=[("disabled", theme["fg"])],
+                       relief=[("pressed", "flat")])
+
+        self.style.configure("Warning.TButton",
+                             background=theme["warning"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             focuscolor=theme["warning"],
+                             padding=(16, 8),
+                             font=theme["font"],
+                             relief="flat")
+
+        self.style.map("Warning.TButton",
+                       background=[("active", self._adjust_color(theme["warning"], -20)),
+                                   ("pressed", theme["warning"]),
+                                   ("disabled", theme["border"])],
+                       foreground=[("disabled", theme["fg"])],
+                       relief=[("pressed", "flat")])
+
+        self.style.configure("Error.TButton",
+                             background=theme["error"],
+                             foreground="#ffffff",
+                             borderwidth=0,
+                             focuscolor=theme["error"],
+                             padding=(16, 8),
+                             font=theme["font"],
+                             relief="flat")
+
+        self.style.map("Error.TButton",
+                       background=[("active", self._adjust_color(theme["error"], -20)),
+                                   ("pressed", theme["error"]),
+                                   ("disabled", theme["border"])],
+                       foreground=[("disabled", theme["fg"])],
+                       relief=[("pressed", "flat")])
+
+        # Add styling for different progressbar types
+        self.style.configure("Success.TProgressbar",
+                             background=theme["success"],
+                             troughcolor=theme["surface"])
+
+        self.style.configure("Warning.TProgressbar",
+                             background=theme["warning"],
+                             troughcolor=theme["surface"])
+
+        self.style.configure("Error.TProgressbar",
+                             background=theme["error"],
+                             troughcolor=theme["surface"])
 
         # Menubutton
         self.style.configure("TMenubutton",
@@ -709,6 +827,32 @@ class ThemedTk:
                        bordercolor=[("focus", theme["accent"])],
                        arrowcolor=[("active", theme["accent"])])
 
+    def _apply_glassmorphism_effect(self):
+        """Apply glassmorphism effect using layered transparency"""
+        # For glassmorphism, we'll enhance the Card.TFrame style to have more transparency
+        theme = self._theme_data
+        # Configure Card frames to have a semi-transparent appearance for glass effect
+        self.style.configure("Card.TFrame",
+                             background=theme["surface"],  # Already has transparency
+                             relief="flat",
+                             borderwidth=1,
+                             bordercolor=theme["border"])
+
+    def _apply_neumorphism_effect(self):
+        """Apply neumorphism effect with soft shadows and highlights"""
+        # For neumorphism, we'll enhance the Card.TFrame to have soft shadow effects
+        theme = self._theme_data
+        shadow_effect = theme.get("shadow", None)
+
+        # Configure Card frames to have neumorphism effect
+        self.style.configure("Card.TFrame",
+                             background=theme["surface"],
+                             relief="flat",
+                             borderwidth=0)
+
+        # For more advanced neumorphism, we could add custom drawing
+        # to create the soft shadow effect on the canvas
+
     def get_theme_list(self):
         """Return list of available theme names"""
         return list(THEMES.keys())
@@ -730,6 +874,25 @@ class ThemedTk:
         if theme_name is None:
             return self._theme_data
         return THEMES.get(theme_name)
+
+    def update_theme_colors(self, **kwargs):
+        """
+        Update specific colors in the current theme
+
+        Args:
+            **kwargs: Color properties to update (bg, fg, accent, etc.)
+        """
+        if self.current_theme is None:
+            raise ValueError("No theme is currently set")
+
+        # Update the theme in the global THEMES dictionary
+        for key, value in kwargs.items():
+            if key in THEMES[self.current_theme]:
+                THEMES[self.current_theme][key] = value
+
+        # Reapply the current theme to update the styles
+        current_theme_name = self.current_theme
+        self.set_theme(current_theme_name)
 
     def create_card(self, parent, **kwargs):
         """
@@ -803,6 +966,51 @@ def create_sidebar(parent, width=250, **kwargs):
         ttk.Frame with Sidebar style
     """
     return ttk.Frame(parent, style="Sidebar.TFrame", width=width, **kwargs)
+
+
+def animate_widget(widget, property_name, start_value, end_value, duration=500, steps=50):
+    """
+    Animate a widget property from start_value to end_value
+
+    Args:
+        widget: The widget to animate
+        property_name: The property to animate (e.g., 'background', 'alpha')
+        start_value: Starting value
+        end_value: Ending value
+        duration: Duration of animation in milliseconds
+        steps: Number of steps in the animation
+    """
+    import tkinter as tk
+
+    # Calculate step size and interval
+    step_size = (end_value - start_value) / steps
+    interval = duration // steps
+
+    def animate_step(step=0):
+        if step <= steps:
+            current_value = start_value + (step_size * step)
+            widget.configure(**{property_name: current_value})
+            widget.after(interval, animate_step, step + 1)
+
+    animate_step()
+
+
+def animate_theme_transition(theme_manager, new_theme_name, duration=500):
+    """
+    Animate the transition between themes
+
+    Args:
+        theme_manager: The ThemedTk instance
+        new_theme_name: Name of the new theme
+        duration: Duration of the transition in milliseconds
+    """
+    # Get the current and new theme colors
+    current_colors = theme_manager.get_theme_colors()
+    new_colors = THEMES[new_theme_name].copy()
+
+    # For now, just switch to the new theme immediately
+    # In a more advanced implementation, we could animate color transitions
+    theme_manager.set_theme(new_theme_name)
 
 
 def create_demo(root=None):

@@ -2,12 +2,12 @@
 
 <div align="center">
 
-![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v2.1.0-blue?style=for-the-badge)
+![TkModernThemes Banner](https://img.shields.io/badge/TkModernThemes-v3.0.0-blue?style=for-the-badge)
 ![Python Version](https://img.shields.io/badge/python-3.7+-brightgreen?style=for-the-badge&logo=python)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
 
-**A modern, beautiful theme library for Python Tkinter applications featuring 10+ contemporary themes with advanced styling**
+**A modern, beautiful theme library for Python Tkinter applications featuring 13 contemporary themes with advanced styling**
 
 [Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples) • [Themes](#-themes) • [Demo](#-demo)
 
@@ -21,7 +21,7 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 
 ### ✨ Key Features
 
-- 🎭 **10+ Professional Themes** - Including Cyberpunk, Minimal Zen, Dark Pro, Glassmorphism, Neomorphism, and more
+- 🎭 **13 Professional Themes** - Including Cyberpunk, Minimal Zen, Dark Pro, Glassmorphism, Neomorphism, Nexus Dark/Light, PySide Fusion, Material Deep, Fluent Dark/Light, Cyber Nexus, and Nord Frost
 - 🎯 **Complete Widget Coverage** - Every Tkinter/ttk widget fully themed and styled
 - ⚡ **Zero Dependencies** - Only requires Python's standard library
 - 🔄 **Dynamic Theme Switching** - Change themes on-the-fly without restarting
@@ -29,6 +29,7 @@ Transform your Tkinter applications from dated to dazzling! TkModernThemes bring
 - 📱 **Responsive Components** - Adaptive layouts that work with any window size
 - 🛠️ **Easy Integration** - Add modern themes with just 3 lines of code
 - 🎪 **Interactive Demo** - Built-in showcase of all themes and components
+- 🎨 **Customizable Themes** - Modify theme colors and properties dynamically
 
 ---
 
@@ -107,23 +108,20 @@ python -m TkModernThemes
 
 ## 🎨 Themes
 
-TkModernThemes includes 6 professionally designed themes, each optimized for different use cases:
+TkModernThemes includes 13 professionally designed themes, each optimized for different use cases:
 
 ### 1. 🌌 Glassmorphism
 <details>
 <summary>Click to expand</summary>
 
-          
-<img width="453" height="587" alt="Screenshot 2025-10-26 194251" src="https://github.com/user-attachments/assets/2b38ca52-81fc-4322-bf19-eacfe8a551e7" />
-
-**Style:** Frosted glass effect with deep purples and indigo  
-**Best For:** Modern web-style applications, dashboards, creative tools  
+**Style:** Frosted glass effect with deep purples and indigo
+**Best For:** Modern web-style applications, dashboards, creative tools
 **Vibe:** Sleek, professional, contemporary
 
 **Colors:**
-- Background: `#0f0f1e` (Deep navy)
+- Background: `#1e1e2e` (Dark base for glass effect)
 - Accent: `#6366f1` (Indigo)
-- Surface: `#1a1a2e` (Dark surface)
+- Surface: `#2d2d3d` (Slightly lighter than bg for contrast)
 
 ```python
 theme.set_theme("glassmorphism")
@@ -134,16 +132,13 @@ theme.set_theme("glassmorphism")
 <details>
 <summary>Click to expand</summary>
 
-<img width="449" height="584" alt="Screenshot 2025-10-26 194222" src="https://github.com/user-attachments/assets/625b83c5-bc5c-454a-9663-86ce11443371" />
-
-
-**Style:** Soft 3D shadows and highlights for tactile feeling  
-**Best For:** Elegant interfaces, design-focused apps, portfolios  
+**Style:** Soft 3D shadows and highlights for tactile feeling
+**Best For:** Elegant interfaces, design-focused apps, portfolios
 **Vibe:** Soft, tactile, refined
 
 **Colors:**
 - Background: `#e0e5ec` (Soft gray)
-- Accent: `#6c5ce7` (Purple)
+- Accent: `#5c6bc0` (Blue-purple)
 - Surface: `#e0e5ec` (Matching background)
 
 ```python
@@ -155,69 +150,208 @@ theme.set_theme("neomorphism")
 <details>
 <summary>Click to expand</summary>
 
-<img width="456" height="588" alt="Screenshot 2025-10-26 194329" src="https://github.com/user-attachments/assets/1092424e-28a7-414b-bd37-6c09df99f785" />
+**Style:** High-contrast neon colors with dark backgrounds
+**Best For:** Gaming apps, tech tools, futuristic interfaces
+**Vibe:** Bold, energetic, cutting-edge
 
-
-**Style:** High-contrast neon colors with dark backgrounds  
+**Colors:**
+- Background: `#0a0a0f` (Deep black-blue)
+- Accent: `#ff2a6d` (Hot pink)
+- Secondary: `#ff9d00` (Orange)
+- Text: `#00ff9d` (Neon green)
 
 ```python
 theme.set_theme("cyberpunk")
 ```
-
-### 2. Minimal Zen
-**Style:** Clean, light theme with ample whitespace  
-**Best For:** Productivity apps, reading, documentation  
-**Vibe:** Calm, focused, distraction-free  
-**Key Colors:** Soft grays, blues, and whites
-- Border: `#7ee787` (Green)
-
-```python
-theme.set_theme("aurora")
-```
 </details>
 
-### 5. 🧘 Minimal Zen
+### 4. 🧘 Minimal Zen
 <details>
 <summary>Click to expand</summary>
 
-
-<img width="457" height="586" alt="Screenshot 2025-10-26 194501" src="https://github.com/user-attachments/assets/07a1880f-6f45-401b-a64f-eb8606a656f3" />
-
-
-**Style:** Clean, minimal design with teal accents  
-**Best For:** Productivity tools, note-taking apps, minimalist interfaces  
+**Style:** Clean, minimal design with teal accents
+**Best For:** Productivity tools, note-taking apps, minimalist interfaces
 **Vibe:** Clean, calm, focused
 
 **Colors:**
-- Background: `#fafafa` (Off-white)
-- Accent: `#2dd4bf` (Teal)
+- Background: `#f8f9fa` (Off-white)
+- Accent: `#6c5ce7` (Purple)
 - Surface: `#ffffff` (Pure white)
-- Text: `#1a1a1a` (Near black)
+- Text: `#2d3436` (Dark gray)
 
 ```python
 theme.set_theme("minimal_zen")
 ```
 </details>
 
-### 6. 💻 Dark Pro
+### 5. 💻 Dark Pro
 <details>
 <summary>Click to expand</summary>
 
-<img width="455" height="587" alt="Screenshot 2025-10-26 194534" src="https://github.com/user-attachments/assets/2ede4e20-0406-4759-b650-d8525e41e315" />
-
-
-**Style:** Professional dark theme similar to VS Code  
-**Best For:** Code editors, development tools, terminal apps  
+**Style:** Professional dark theme similar to VS Code
+**Best For:** Code editors, development tools, terminal apps
 **Vibe:** Professional, focused, developer-friendly
 
 **Colors:**
-- Background: `#1e1e1e` (VS Code dark)
-- Accent: `#007acc` (Blue)
-- Surface: `#252526` (Slightly lighter)
-- Text: `#d4d4d4` (Light gray)
+- Background: `#121212` (Dark gray-black)
+- Accent: `#7c4dff` (Purple)
+- Surface: `#1e1e1e` (Slightly lighter)
+- Text: `#e0e0e0` (Light gray)
 
 ```python
 theme.set_theme("dark_pro")
+```
+</details>
+
+### 6. 🔵 Nexus Dark
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Modern dark theme with vibrant accents
+**Best For:** Professional applications, development tools
+**Vibe:** Professional, modern, sleek
+
+**Colors:**
+- Background: `#0a0a0a` (Deep black)
+- Accent: `#3b82f6` (Blue)
+- Surface: `#18181b` (Dark surface)
+- Text: `#e4e4e7` (Light gray)
+
+```python
+theme.set_theme("nexus_dark")
+```
+</details>
+
+### 7. ☀️ Nexus Light
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Modern light theme with clean aesthetics
+**Best For:** Productivity tools, documentation, light UIs
+**Vibe:** Clean, bright, accessible
+
+**Colors:**
+- Background: `#ffffff` (Pure white)
+- Accent: `#2563eb` (Blue)
+- Surface: `#f4f4f5` (Off-white)
+- Text: `#18181b` (Dark gray-black)
+
+```python
+theme.set_theme("nexus_light")
+```
+</details>
+
+### 8. 🔮 PySide Fusion
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Inspired by Qt's Fusion theme
+**Best For:** Cross-platform applications, Qt-style UIs
+**Vibe:** Professional, consistent, familiar
+
+**Colors:**
+- Background: `#353535` (Medium gray)
+- Accent: `#308cc6` (Blue)
+- Surface: `#3d3d3d` (Medium-dark gray)
+- Text: `#dddddd` (Light gray)
+
+```python
+theme.set_theme("pyside_fusion")
+```
+</details>
+
+### 9. 🏔️ Material Deep
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Deep, rich material design theme
+**Best For:** Material design applications, Google-style UIs
+**Vibe:** Rich, deep, material-inspired
+
+**Colors:**
+- Background: `#121212` (Dark gray-black)
+- Accent: `#bb86fc` (Light purple)
+- Surface: `#1e1e1e` (Dark surface)
+- Text: `#e0e0e0` (Light gray)
+
+```python
+theme.set_theme("material_deep")
+```
+</details>
+
+### 10. 🪟 Fluent Dark
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Microsoft Fluent Design dark theme
+**Best For:** Windows applications, Microsoft-style UIs
+**Vibe:** Modern, clean, Microsoft-inspired
+
+**Colors:**
+- Background: `#202020` (Dark gray)
+- Accent: `#0078d4` (Microsoft blue)
+- Surface: `#2b2b2b` (Medium-dark gray)
+- Text: `#ffffff` (Pure white)
+
+```python
+theme.set_theme("fluent_dark")
+```
+</details>
+
+### 11. 🪟 Fluent Light
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Microsoft Fluent Design light theme
+**Best For:** Windows applications, Microsoft-style UIs
+**Vibe:** Clean, bright, Microsoft-inspired
+
+**Colors:**
+- Background: `#f3f3f3` (Light gray)
+- Accent: `#0067c0` (Microsoft blue)
+- Surface: `#ffffff` (Pure white)
+- Text: `#000000` (Pure black)
+
+```python
+theme.set_theme("fluent_light")
+```
+</details>
+
+### 12. 🤖 Cyber Nexus
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Futuristic cyber theme with vibrant colors
+**Best For:** Sci-fi applications, gaming tools, tech interfaces
+**Vibe:** Futuristic, vibrant, high-tech
+
+**Colors:**
+- Background: `#0d0d0f` (Deep dark)
+- Accent: `#ff00ff` (Magenta)
+- Secondary: `#00ff00` (Green)
+- Text: `#00ffff` (Cyan)
+
+```python
+theme.set_theme("cyber_nexus")
+```
+</details>
+
+### 13. ❄️ Nord Frost
+<details>
+<summary>Click to expand</summary>
+
+**Style:** Arctic-inspired theme with cool blues and grays
+**Best For:** Scientific applications, Arctic-themed UIs
+**Vibe:** Cool, arctic, professional
+
+**Colors:**
+- Background: `#2e3440` (Nord base)
+- Accent: `#88c0d0` (Nord blue)
+- Surface: `#3b4252` (Nord surface)
+- Text: `#eceff4` (Nord text)
+
+```python
+theme.set_theme("nord_frost")
 ```
 </details>
 

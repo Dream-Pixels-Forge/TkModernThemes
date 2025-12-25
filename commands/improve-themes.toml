@@ -1,0 +1,62 @@
+[command]
+name = "improve-themes"
+description = "Enhance TkModernThemes library with advanced features, new themes, and improved functionality"
+argument_hint = "[feature] [options]"
+category = "development"
+tags = ["tkinter", "themes", "ui", "enhancement"]
+version = "1.0.0"
+author = "Qwen Code"
+usage_examples = [
+    "/improve-themes glassmorphism effects",
+    "/improve-themes theme cyberpunk",
+    "/improve-themes widgets enhance",
+    "/improve-themes documentation update"
+]
+documentation = "https://github.com/your-repo/tkmodernthemes/docs/improve-themes.md"
+
+[prompt]
+template = """
+<task_description>
+Enhance the TkModernThemes library with advanced features, new themes, and improved functionality.
+Analyze the current codebase and implement improvements based on the user's request.
+</task_description>
+
+<requirements>
+- Maintain backward compatibility
+- Follow existing code patterns and conventions
+- Add comprehensive documentation
+- Create example implementations
+- Ensure cross-platform compatibility
+- Maintain performance standards
+</requirements>
+
+<workflow>
+1. Analyze current implementation in TkModernThemes/__init__.py
+2. Identify areas for improvement based on user request
+3. Implement requested features following existing patterns
+4. Update documentation to reflect changes
+5. Create example applications demonstrating new features
+6. Test implementation for compatibility
+</workflow>
+
+<user_request>
+{user_input}
+</user_request>
+
+<implementation_guidelines>
+- Follow the existing theme structure for new themes
+- Use the THEMES dictionary format for consistency
+- Implement proper error handling
+- Add appropriate docstrings
+- Maintain the same import structure
+- Ensure all new features work with existing theme manager
+</implementation_guidelines>
+
+<validation>
+- Test new features with multiple themes
+- Verify existing functionality remains intact
+- Check cross-platform compatibility
+- Validate proper error handling
+- Confirm documentation accuracy
+</validation>
+"""
